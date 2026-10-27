@@ -10,6 +10,8 @@ export default defineConfig({
   // pour permettre une politique de sécurité stricte (Content-Security-Policy, voir netlify.toml)
   build: {
     inlineStylesheets: 'never',
+    // association.html plutôt que association/index.html : Netlify sert /association sans redirection
+    format: 'file',
   },
   vite: {
     plugins: [tailwindcss()],

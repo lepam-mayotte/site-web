@@ -1,0 +1,42 @@
+---
+// Carte d'une actualité : photo (si fournie), thématique, titre, résumé et date.
+import type { CollectionEntry } from 'astro:content';
+import Photo from './Photo.astro';
+import { photosDu } from '../lib/photos';
+import { dateLongue } from '../lib/dates';
+
+interface Props {
+  actu: CollectionEntry<'actus'>;
+  nomThematique?: string;
+}
+
+const { actu, nomThematique } = Astro.props;
+const { bandeau } = photosDu(`actus/${actu.id}`);
+const { evenement } = actu.data;
+---
+
+<a
+  href={`/actualites/${actu.id}`}
+  class="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-md"
+>
+  {bandeau && (
+    <div class="overflow-hidden">
+      <Photo
+        image={bandeau}
+        label={actu.data.photo ?? actu.data.titre}
+        sizes="(min-width: 768px) 33vw, 100vw"
+        class="aspect-[16/10] w-full transition duration-500 group-hover:scale-105"
+      />
+    </div>
+  )}
+  <div class="flex flex-1 flex-col p-7">
+    <p class="text-xs font-medium tracking-wide text-accent uppercase">
+      {nomThematique}{evenement && ' · Événement'}
+    </p>
+    <h3 class="mt-3 text-xl font-semibold tracking-tight">{actu.data.titre}</h3>
+    <p class="mt-3 flex-1 text-ink-soft">{actu.data.resume}</p>
+    <p class="mt-6 text-sm text-ink-soft">
+      {evenement ? `Le ${dateLongue(evenement.date)}` : dateLongue(actu.data.date)}
+    </p>
+  </div>
+</a>

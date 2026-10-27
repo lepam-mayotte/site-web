@@ -38,7 +38,8 @@ const thematiques = defineCollection({
   }),
 });
 
-// Une actualité = un fichier Markdown dans src/content/actus/
+// Une actualité = un fichier Markdown dans src/content/actus/ (créé avec « npm run nouvelle-actu »).
+// Ses photos vont dans src/assets/photos/actus/<même nom>/ (bandeau.jpg + galerie).
 const actus = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/actus' }),
   schema: z.object({
@@ -46,6 +47,16 @@ const actus = defineCollection({
     date: z.coerce.date(),
     thematique: reference('thematiques'),
     resume: z.string(),
+    photo: z.string().optional(), // description de la photo bandeau.jpg (texte alternatif)
+    // Pour un événement : date, lieu et lien de la billetterie AssoConnect (facultatif)
+    evenement: z
+      .object({
+        date: z.coerce.date(),
+        horaires: z.string().optional(),
+        lieu: z.string().optional(),
+        billetterie: z.string().url().optional(),
+      })
+      .optional(),
   }),
 });
 

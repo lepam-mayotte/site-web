@@ -1,0 +1,119 @@
+---
+// Agenda des événements à venir, puis toutes les actualités, filtrables par thématique.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CarteActu from '../../components/CarteActu.astro';
+import { estAVenir, jourEtMois } from '../../lib/dates';
+
+const thematiques = (await getCollection('thematiques')).sort((a, b) => a.data.ordre - b.data.ordre);
+const nomThematique = (id: string) => thematiques.find((t) => t.id === id)?.data.titre;
+
+const actus = (await getCollection('actus')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const aVenir = actus
+  .filter((a) => a.data.evenement && estAVenir(a.data.evenement.date))
+  .sort((a, b) => a.data.evenement!.date.valueOf() - b.data.evenement!.date.valueOf());
+
+// Seules les thématiques qui ont au moins une actualité apparaissent dans les filtres
+const filtres = thematiques.filter((t) => actus.some((a) => a.data.thematique.id === t.id));
+---
+
+<BaseLayout
+  title="Actualités"
+  description="Les dernières actualités et les prochains événements de LEPAM Mayotte à Petite-Terre."
+>
+  <!-- Introduction -->
+  <section class="bg-brand-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <p class="text-sm font-medium tracking-wide text-accent uppercase">Actualités</p>
+      <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
+        La vie de LEPAM, <span class="text-gradient">en direct</span>.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-ink-soft">
+        Nos derniers projets, nos événements à venir et les moments forts de l'association.
+      </p>
+    </div>
+  </section>
+
+  <!-- Agenda -->
+  {aVenir.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+      <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">À venir</h2>
+      <ul class="mt-10 space-y-4">
+        {aVenir.map((actu) => {
+          const ev = actu.data.evenement!;
+          const { jour, mois } = jourEtMois(ev.date);
+          return (
+            <li class="flex flex-col gap-6 rounded-3xl bg-white p-6 ring-1 ring-black/10 sm:flex-row sm:items-center sm:p-8">
+              <p class="bg-gradient-brand flex size-20 shrink-0 flex-col items-center justify-center rounded-2xl text-white">
+                <span class="text-3xl leading-none font-semibold">{jour}</span>
+                <span class="text-sm uppercase">{mois}</span>
+              </p>
+              <div class="flex-1">
+                <p class="text-xs font-medium tracking-wide text-accent uppercase">{nomThematique(actu.data.thematique.id)}</p>
+                <h3 class="mt-1 text-2xl font-semibold tracking-tight">{actu.data.titre}</h3>
+                <p class="mt-1 text-ink-soft">{[ev.horaires, ev.lieu].filter(Boolean).join(' · ')}</p>
+              </div>
+              <div class="flex flex-wrap gap-3">
+                <a href={`/actualites/${actu.id}`} class="rounded-full px-5 py-2.5 font-medium ring-1 ring-black/10 transition hover:ring-black/20">En savoir plus</a>
+                {ev.billetterie && (
+                  <a href={ev.billetterie} class="bg-gradient-brand rounded-full px-5 py-2.5 font-medium text-white transition hover:opacity-90">S'inscrire</a>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+
+  <!-- Toutes les actualités -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6" data-actus>
+    <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Toutes les actualités</h2>
+
+    {filtres.length > 1 && (
+      <div class="mt-8 flex flex-wrap gap-2" role="group" aria-label="Filtrer par thématique">
+        <button type="button" data-filtre="" aria-pressed="true" class="filtre">Toutes</button>
+        {filtres.map((t) => (
+          <button type="button" data-filtre={t.id} aria-pressed="false" class="filtre">{t.data.titre}</button>
+        ))}
+      </div>
+    )}
+
+    <ul class="mt-10 grid gap-6 md:grid-cols-3">
+      {actus.map((actu) => (
+        <li data-thematique={actu.data.thematique.id}>
+          <CarteActu actu={actu} nomThematique={nomThematique(actu.data.thematique.id)} />
+        </li>
+      ))}
+    </ul>
+
+    {actus.length === 0 && <p class="mt-10 text-lg text-ink-soft">Aucune actualité pour le moment.</p>}
+  </section>
+</BaseLayout>
+
+<style>
+  @reference "../../styles/global.css";
+
+  .filtre {
+    @apply rounded-full bg-white px-4 py-2 text-sm font-medium ring-1 ring-black/10 transition hover:ring-accent;
+  }
+  .filtre[aria-pressed='true'] {
+    @apply bg-ink text-white ring-ink;
+  }
+</style>
+
+<script>
+  // Filtre des actualités par thématique (sans JavaScript, toutes restent affichées)
+  const section = document.querySelector<HTMLElement>('[data-actus]');
+  const boutons = section?.querySelectorAll<HTMLButtonElement>('[data-filtre]') ?? [];
+  const cartes = section?.querySelectorAll<HTMLElement>('[data-thematique]') ?? [];
+
+  boutons.forEach((bouton) =>
+    bouton.addEventListener('click', () => {
+      const filtre = bouton.dataset.filtre;
+      boutons.forEach((b) => b.setAttribute('aria-pressed', String(b === bouton)));
+      cartes.forEach((carte) => (carte.hidden = Boolean(filtre) && carte.dataset.thematique !== filtre));
+    }),
+  );
+</script>

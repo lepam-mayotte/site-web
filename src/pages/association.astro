@@ -1,0 +1,129 @@
+---
+// Présentation de l'association. Les textes sont dans src/config/association.ts,
+// la photo du bandeau dans src/assets/photos/association/bandeau.jpg.
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import Partenaires from '../components/Partenaires.astro';
+import Financeurs from '../components/Financeurs.astro';
+import { chiffres, equipe, membres, presentation, valeurs } from '../config/association';
+import { photoNommee, photosDu } from '../lib/photos';
+
+const { bandeau } = photosDu('association');
+const thematiques = (await getCollection('thematiques')).sort((a, b) => a.data.ordre - b.data.ordre);
+const equipeAvecPhotos = equipe.map((m) => ({ ...m, image: m.photo ? photoNommee('equipe', m.photo) : undefined }));
+---
+
+<BaseLayout
+  title="L'association"
+  description="LEPAM Mayotte, Luttons Ensemble pour un Avenir Meilleur : une association de Petite-Terre créée en 2022 pour la jeunesse de Mayotte."
+>
+  <!-- Introduction -->
+  <section class="bg-brand-50">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
+      <div>
+        <p class="text-sm font-medium tracking-wide text-accent uppercase">L'association</p>
+        <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
+          Luttons ensemble pour un <span class="text-gradient">avenir meilleur</span>.
+        </h1>
+        <p class="mt-6 max-w-lg text-lg text-ink-soft">{presentation.mission}</p>
+      </div>
+      <Photo
+        image={bandeau}
+        label="Les jeunes et l'équipe de LEPAM à Petite-Terre"
+        loading="eager"
+        sizes="(min-width: 768px) 50vw, 100vw"
+        class="aspect-[4/3] w-full rounded-[2rem]"
+      />
+    </div>
+  </section>
+
+  <!-- Histoire -->
+  <section class="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-5 md:py-28">
+    <div class="md:col-span-2">
+      <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Notre histoire</h2>
+      <p class="mt-4 text-lg text-ink-soft">Née à Petite-Terre en {presentation.creation}.</p>
+    </div>
+    <div class="space-y-5 text-xl leading-relaxed text-ink/85 md:col-span-3">
+      {presentation.histoire.map((paragraphe) => <p>{paragraphe}</p>)}
+    </div>
+  </section>
+
+  <!-- Chiffres clés -->
+  <section class="bg-gradient-brand text-white">
+    <dl class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-4">
+      {chiffres.map((c) => (
+        <div class="flex flex-col-reverse justify-end">
+          <dt class="mt-2 text-white/85">{c.label}</dt>
+          <dd class="text-5xl font-semibold tracking-tight">{c.valeur}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+
+  <!-- Valeurs -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+    <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Nos valeurs</h2>
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {valeurs.map((v) => (
+        <li class="reveal rounded-3xl bg-brand-50 p-8">
+          <h3 class="text-gradient text-2xl font-semibold tracking-tight">{v.titre}</h3>
+          <p class="mt-3 text-ink-soft">{v.texte}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Pôles d'action -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Cinq pôles d'action</h2>
+        <a href="/actions" class="shrink-0 font-medium text-accent hover:underline">Découvrir nos actions ›</a>
+      </div>
+      <ul class="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        {thematiques.map((t) => (
+          <li>
+            <a href={`/actions/${t.id}`} class="block h-full rounded-2xl bg-white p-5 ring-1 ring-black/5 transition hover:ring-accent">
+              <p class="font-semibold tracking-tight">{t.data.titre}</p>
+              <p class="mt-1 text-sm text-ink-soft">{t.data.accroche}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Équipe (affichée dès qu'au moins un membre est renseigné) -->
+  {equipeAvecPhotos.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+      <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">L'équipe</h2>
+      <ul class="mt-12 grid grid-cols-2 gap-6 md:grid-cols-4">
+        {equipeAvecPhotos.map((m) => (
+          <li class="reveal">
+            <Photo image={m.image} label={m.nom} sizes="(min-width: 768px) 25vw, 50vw" class="aspect-square w-full rounded-3xl" />
+            <p class="mt-4 text-lg font-semibold tracking-tight">{m.nom}</p>
+            <p class="text-ink-soft">{m.role}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <!-- Fonctionnement -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+    <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Qui fait vivre l'association ?</h2>
+    <dl class="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+      {membres.map((m) => (
+        <div class="border-t-2 border-accent pt-5">
+          <dt class="text-xl font-semibold tracking-tight">{m.titre}</dt>
+          <dd class="mt-2 text-ink-soft">{m.texte}</dd>
+        </div>
+      ))}
+    </dl>
+    <a href="/s-engager" class="mt-12 inline-block rounded-full bg-ink px-6 py-3 font-medium text-white transition hover:bg-ink/85">Rejoindre l'association</a>
+  </section>
+
+  <Partenaires />
+  <Financeurs />
+</BaseLayout>

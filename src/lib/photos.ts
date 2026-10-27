@@ -26,6 +26,13 @@ const texteAlternatif = (nom: string) => {
   return texte.charAt(0).toUpperCase() + texte.slice(1);
 };
 
+// Une photo précise d'un dossier, par son nom de fichier sans extension (ex. une photo de l'équipe)
+export function photoNommee(dossier: string, nom: string) {
+  return Object.entries(fichiers).find(
+    ([chemin]) => chemin.startsWith(`/src/assets/photos/${dossier}/`) && nomDeFichier(chemin) === nom,
+  )?.[1].default;
+}
+
 export function photosDu(dossier: string) {
   const photos = Object.entries(fichiers)
     .filter(([chemin]) => chemin.startsWith(`/src/assets/photos/${dossier}/`))

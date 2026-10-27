@@ -1,0 +1,126 @@
+---
+// Page d'une actualité. Le texte vient de src/content/actus/<id>.md,
+// les photos de src/assets/photos/actus/<id>/ (bandeau.jpg + galerie).
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Photo from '../../components/Photo.astro';
+import Galerie from '../../components/Galerie.astro';
+import ListeActus from '../../components/ListeActus.astro';
+import { photosDu } from '../../lib/photos';
+import { dateLongue, estAVenir } from '../../lib/dates';
+
+export async function getStaticPaths() {
+  const actus = await getCollection('actus');
+  return actus.map((actu) => ({ params: { id: actu.id }, props: { actu } }));
+}
+
+const { actu } = Astro.props;
+const { titre, date, resume, photo, evenement } = actu.data;
+const { Content } = await render(actu);
+const thematique = await getEntry(actu.data.thematique);
+const { bandeau, galerie } = photosDu(`actus/${actu.id}`);
+---
+
+<BaseLayout title={titre} description={resume}>
+  <article>
+    <!-- En-tête -->
+    <header class="mx-auto max-w-3xl px-4 pt-16 sm:px-6 md:pt-24">
+      <nav aria-label="Fil d'Ariane" class="text-sm text-ink-soft">
+        <a href="/actualites" class="hover:text-ink">Actualités</a>
+        <span aria-hidden="true" class="mx-2">›</span>
+        <a href={`/actions/${thematique?.id}`} class="hover:text-ink">{thematique?.data.titre}</a>
+      </nav>
+      <h1 class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{titre}</h1>
+      <p class="mt-4 text-xl text-ink-soft">{resume}</p>
+      <p class="mt-6 text-sm text-ink-soft">
+        Publié le <time datetime={date.toISOString().slice(0, 10)}>{dateLongue(date)}</time>
+      </p>
+    </header>
+
+    {bandeau && (
+      <div class="mx-auto mt-10 max-w-5xl px-4 sm:px-6">
+        <Photo image={bandeau} label={photo ?? titre} loading="eager" sizes="(min-width: 1024px) 1024px, 100vw" class="aspect-[16/9] w-full rounded-[2rem]" />
+      </div>
+    )}
+
+    <!-- Infos pratiques de l'événement -->
+    {evenement && (
+      <aside class="mx-auto mt-10 max-w-3xl px-4 sm:px-6">
+        <div class="rounded-3xl bg-brand-50 p-6 sm:p-8">
+          <dl class="grid gap-4 sm:grid-cols-3">
+            <div>
+              <dt class="text-sm font-medium tracking-wide text-accent uppercase">Date</dt>
+              <dd class="mt-1 font-semibold">{dateLongue(evenement.date)}</dd>
+            </div>
+            {evenement.horaires && (
+              <div>
+                <dt class="text-sm font-medium tracking-wide text-accent uppercase">Horaires</dt>
+                <dd class="mt-1 font-semibold">{evenement.horaires}</dd>
+              </div>
+            )}
+            {evenement.lieu && (
+              <div>
+                <dt class="text-sm font-medium tracking-wide text-accent uppercase">Lieu</dt>
+                <dd class="mt-1 font-semibold">{evenement.lieu}</dd>
+              </div>
+            )}
+          </dl>
+          {evenement.billetterie && estAVenir(evenement.date) && (
+            <a href={evenement.billetterie} class="bg-gradient-brand mt-6 inline-block rounded-full px-6 py-3 font-medium text-white transition hover:opacity-90">
+              S'inscrire
+            </a>
+          )}
+          {!estAVenir(evenement.date) && <p class="mt-4 text-sm text-ink-soft">Cet événement est passé.</p>}
+        </div>
+      </aside>
+    )}
+
+    <!-- Texte -->
+    <div class="texte mx-auto max-w-3xl px-4 py-12 text-lg leading-relaxed text-ink/85 sm:px-6">
+      <Content />
+    </div>
+
+    {galerie.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+        <h2 class="text-3xl font-semibold tracking-tight">En images</h2>
+        <div class="mt-8">
+          <Galerie photos={galerie} />
+        </div>
+      </section>
+    )}
+  </article>
+
+  <!-- Autres actualités de la même thématique -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">À lire aussi</h2>
+        <a href="/actualites" class="shrink-0 font-medium text-accent hover:underline">Toutes les actualités ›</a>
+      </div>
+      <div class="mt-10">
+        <ListeActus exclure={actu.id} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  @reference "../../styles/global.css";
+
+  /* Mise en forme du texte Markdown */
+  .texte :global(p + p) {
+    @apply mt-5;
+  }
+  .texte :global(h2) {
+    @apply mt-10 mb-4 text-2xl font-semibold tracking-tight text-ink;
+  }
+  .texte :global(a) {
+    @apply font-medium text-accent underline;
+  }
+  .texte :global(ul) {
+    @apply my-5 list-disc space-y-2 pl-6;
+  }
+  .texte :global(strong) {
+    @apply font-semibold text-ink;
+  }
+</style>

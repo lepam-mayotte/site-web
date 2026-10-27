@@ -17,9 +17,10 @@ const grandes = await Promise.all(
 ---
 
 <div data-galerie>
+  <!-- Pas d'animation « reveal » sur les photos : en colonnes, Chrome la calcule mal et certaines disparaissent -->
   <ul class="columns-2 gap-4 md:columns-3">
     {photos.map((photo, i) => (
-      <li class="reveal mb-4 break-inside-avoid">
+      <li class="mb-4 break-inside-avoid">
         <button
           type="button"
           data-index={i}

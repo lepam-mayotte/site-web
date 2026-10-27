@@ -25,6 +25,15 @@ export const links = {
   don: `${assoconnect}/collect/donation/01HK0J16JRJV40FZV0AE1GMBVC/campagne-de-dons-pour-soutenir-nos-projets-a-mayotte`,
   adhesion: `${assoconnect}/page/3005861-adhesion`, // À remplacer par l'URL /collect/... du formulaire
   connexion: `${assoconnect}/contacts/login`, // Connexion des administrateurs à AssoConnect
+  cv: `${assoconnect}/page/2720178-deposer-un-cv`, // À remplacer par l'URL /collect/... du formulaire
+};
+
+// Adresses e-mail des candidatures (ouvertes avec un objet prérempli)
+const mail = (adresse: string, objet: string) => `mailto:${adresse}?subject=${encodeURIComponent(objet)}`;
+
+export const candidatures = {
+  benevolat: mail(site.email, 'Devenir bénévole'),
+  serviceCivique: mail('rh@lepammayotte.com', 'Candidature service civique'),
 };
 
 export const nav = [

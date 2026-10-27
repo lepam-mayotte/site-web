@@ -1,0 +1,108 @@
+---
+// Toutes les façons de soutenir l'association. Adhésion et dons passent par AssoConnect.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { candidatures, links } from '../config/site';
+
+const soutiens = [
+  {
+    id: 'adherer',
+    titre: 'Adhérer',
+    texte: "Devenez membre de LEPAM : vous soutenez son projet dans la durée et participez à la vie de l'association.",
+    bouton: 'Adhérer en ligne',
+    href: links.adhesion,
+  },
+  {
+    id: 'don',
+    titre: 'Faire un don',
+    texte: 'Votre don finance directement nos actions auprès des jeunes de Petite-Terre. Le paiement est sécurisé et votre reçu vous est envoyé par e-mail.',
+    bouton: 'Faire un don',
+    href: links.don,
+  },
+];
+
+const engagements = [
+  {
+    id: 'benevolat',
+    titre: 'Devenir bénévole',
+    texte: "Donnez un peu de votre temps lors de nos actions : nettoyages de plage, Journées du patrimoine, accompagnement scolaire, événements au tiers-lieu.",
+    bouton: 'Proposer mon aide',
+    href: candidatures.benevolat,
+  },
+  {
+    id: 'service-civique',
+    titre: 'Service civique',
+    texte: "LEPAM accueille des volontaires en service civique. Une première expérience pour s'engager auprès des jeunes et se former.",
+    bouton: 'Envoyer ma candidature',
+    href: candidatures.serviceCivique,
+  },
+  {
+    id: 'emploi',
+    titre: 'Emploi',
+    texte: "Vous souhaitez travailler avec nous ou être accompagné dans votre recherche d'emploi ? Déposez votre CV.",
+    bouton: 'Déposer mon CV',
+    href: links.cv,
+  },
+];
+---
+
+<BaseLayout
+  title="S'engager"
+  description="Adhérer, faire un don, devenir bénévole ou volontaire en service civique : toutes les façons d'agir avec LEPAM Mayotte."
+>
+  <!-- Introduction -->
+  <section class="bg-brand-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <p class="text-sm font-medium tracking-wide text-accent uppercase">S'engager</p>
+      <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
+        Agissez à nos côtés pour la <span class="text-gradient">jeunesse de Mayotte</span>.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-ink-soft">
+        Adhérent, donateur, bénévole ou volontaire : chacun, à sa mesure, fait grandir nos projets à Petite-Terre.
+      </p>
+    </div>
+  </section>
+
+  <!-- Soutenir : adhésion et don -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+    <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Soutenir l'association</h2>
+    <ul class="mt-12 grid gap-4 md:grid-cols-2">
+      {soutiens.map((s, i) => (
+        <li id={s.id} class:list={['reveal flex scroll-mt-24 flex-col rounded-[2rem] p-8 sm:p-10', i === 0 ? 'bg-gradient-brand text-white' : 'bg-ink text-white']}>
+          <h3 class="text-3xl font-semibold tracking-tight">{s.titre}</h3>
+          <p class="mt-4 max-w-md text-lg text-white/85">{s.texte}</p>
+          <a href={s.href} class="mt-8 self-start rounded-full bg-white px-6 py-3 font-medium text-ink transition hover:bg-white/90">
+            {s.bouton} <span aria-hidden="true">›</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="mt-6 text-sm text-ink-soft">
+      L'adhésion et les dons sont gérés sur notre espace sécurisé AssoConnect.
+    </p>
+  </section>
+
+  <!-- Donner de son temps -->
+  <section class="bg-mist">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+      <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Donner de son temps</h2>
+      <ul class="mt-12 grid gap-4 md:grid-cols-3">
+        {engagements.map((e) => (
+          <li id={e.id} class="reveal flex scroll-mt-24 flex-col rounded-3xl bg-white p-8 ring-1 ring-black/5">
+            <h3 class="text-2xl font-semibold tracking-tight">{e.titre}</h3>
+            <p class="mt-3 flex-1 text-lg text-ink-soft">{e.texte}</p>
+            <a href={e.href} class="mt-8 self-start font-medium text-accent hover:underline">
+              {e.bouton} <span aria-hidden="true">›</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Une question -->
+  <section class="mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
+    <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">Une question avant de vous engager ?</h2>
+    <p class="mx-auto mt-4 max-w-xl text-lg text-ink-soft">Notre équipe vous répond et vous oriente vers l'action qui vous correspond.</p>
+    <a href="/contact" class="mt-8 inline-block rounded-full bg-ink px-6 py-3 font-medium text-white transition hover:bg-ink/85">Nous contacter</a>
+  </section>
+</BaseLayout>

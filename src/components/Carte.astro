@@ -1,0 +1,41 @@
+---
+// Carte OpenStreetMap intégrée (sans clé ni cookie de suivi), avec l'adresse et un lien d'itinéraire.
+interface Props {
+  adresse: string;
+  horaires?: string;
+  lat: number;
+  lon: number;
+}
+
+const { adresse, horaires, lat, lon } = Astro.props;
+
+const marge = 0.004; // zoom de la carte, en degrés autour du point
+const bbox = [lon - marge, lat - marge, lon + marge, lat + marge].join(',');
+const carte = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
+const agrandir = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=17/${lat}/${lon}`;
+const itineraire = `https://www.openstreetmap.org/directions?to=${lat},${lon}`;
+---
+
+<section class="mx-auto max-w-6xl px-4 pt-20 sm:px-6">
+  <div class="grid gap-8 overflow-hidden rounded-[2rem] bg-mist md:grid-cols-5">
+    <div class="p-8 md:col-span-2 md:p-10">
+      <h2 class="text-4xl font-semibold tracking-tight">Nous trouver</h2>
+      <p class="mt-4 text-lg text-ink/85">{adresse}</p>
+      {horaires && (
+        <p class="mt-2 text-ink-soft">
+          <span class="font-medium text-ink">Horaires :</span> {horaires}
+        </p>
+      )}
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={itineraire} class="rounded-full bg-ink px-5 py-2.5 font-medium text-white transition hover:bg-ink/85">Itinéraire</a>
+        <a href={agrandir} class="rounded-full bg-white px-5 py-2.5 font-medium ring-1 ring-black/10 transition hover:ring-black/20">Agrandir la carte</a>
+      </div>
+    </div>
+    <iframe
+      src={carte}
+      title={`Carte : ${adresse}`}
+      loading="lazy"
+      class="h-80 w-full border-0 md:col-span-3 md:h-full md:min-h-96"
+    ></iframe>
+  </div>
+</section>

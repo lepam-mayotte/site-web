@@ -1,6 +1,6 @@
 ---
 titre: Mobilité internationale
-ordre: 1
+ordre: 2
 accroche: Ouvrir les jeunes mahorais.es au monde.
 resume: "Erasmus+, DiscoverEU, échanges avec Madagascar : partir, apprendre, revenir et partager."
 photo: Jeunes de LEPAM autour d'une borne interactive lors du voyage DiscoverEU à Bruxelles

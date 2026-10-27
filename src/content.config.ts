@@ -16,8 +16,25 @@ const thematiques = defineCollection({
     objectif: z.string(),
     public: z.string(),
     chiffres: z.array(z.object({ valeur: z.string(), label: z.string() })).default([]),
+    titreActions: z.string().default('Ce que nous faisons'),
     actions: z.array(z.object({ titre: z.string(), texte: z.string() })).default([]),
-    appel: z.object({ titre: z.string(), texte: z.string() }),
+    // Services proposés, avec une liste facultative (ex. matériel disponible) (facultatif)
+    services: z
+      .array(z.object({ titre: z.string(), texte: z.string(), elements: z.array(z.string()).default([]) }))
+      .default([]),
+    // À qui s'adressent les services (facultatif)
+    publics: z.array(z.string()).default([]),
+    // Adresse et position GPS, pour afficher une carte (facultatif)
+    lieu: z
+      .object({ adresse: z.string(), horaires: z.string().optional(), lat: z.number(), lon: z.number() })
+      .optional(),
+    // Le bouton principal mène à /contact, sauf si « bouton » et « lien » sont précisés
+    appel: z.object({
+      titre: z.string(),
+      texte: z.string(),
+      bouton: z.string().default('Participer'),
+      lien: z.string().default('/contact'),
+    }),
   }),
 });
 

@@ -21,3 +21,13 @@ export const partenaires = [
   'Croix-Rouge Mayotte',
   'Communauté de communes de Petite-Terre',
 ];
+
+// Financeurs, affichés avec leur logo sur l'accueil.
+// Le logo est lu dans src/assets/logos/financeurs/<logo>.(svg|png|jpg|webp) ;
+// tant qu'il n'est pas déposé, le nom s'affiche à sa place.
+export const financeurs = [
+  { nom: 'Financé par l’Union européenne · NextGenerationEU', logo: 'union-europeenne' },
+  { nom: 'Plan d’investissement dans les compétences, République française et Agence nationale de la cohésion des territoires', logo: 'pic-republique-anct' },
+  { nom: 'Préfet de Mayotte', logo: 'prefet-de-mayotte' },
+  { nom: 'DEFFINOV · Tiers-lieux de formation', logo: 'deffinov' },
+];

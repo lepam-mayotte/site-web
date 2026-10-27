@@ -7,12 +7,15 @@ export const site = {
   description:
     "Association de Petite-Terre engagée pour l'éducation, la mobilité, l'insertion et la solidarité à Mayotte.",
   address: '53 boulevard des Amoureux, 97615 Labattoir',
-  email: 'contact@lepammayotte.com', // À confirmer avec l'association
-  socials: {
-    instagram: 'https://www.instagram.com/lepam_976',
-    youtube: 'https://www.youtube.com/@lepam976',
-    facebook: '', // À compléter
-  },
+  email: 'lepam@lepammayotte.com',
+  telephone: '02 69 64 04 93',
+  // Un réseau sans adresse n'est pas affiché
+  socials: [
+    { nom: 'Facebook', url: '' }, // À compléter
+    { nom: 'Instagram', url: 'https://www.instagram.com/lepam_976' },
+    { nom: 'LinkedIn', url: '' }, // À compléter
+    { nom: 'YouTube', url: 'https://www.youtube.com/@lepam976' },
+  ],
 };
 
 // À la bascule du domaine, remplacer www.lepammayotte.fr par le sous-domaine AssoConnect.

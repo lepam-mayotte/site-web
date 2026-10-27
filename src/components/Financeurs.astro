@@ -1,0 +1,33 @@
+---
+// Bandeau des financeurs : logo si le fichier est déposé, sinon le nom.
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { financeurs } from '../config/association';
+
+const fichiers = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/logos/financeurs/*.{svg,png,jpg,jpeg,webp}',
+  { eager: true },
+);
+
+const logoDe = (nom: string) =>
+  Object.entries(fichiers).find(([chemin]) => chemin.split('/').pop()!.replace(/\.[^.]+$/, '') === nom)?.[1].default;
+
+const liste = financeurs.map((f) => ({ ...f, image: logoDe(f.logo) }));
+---
+
+<section class="border-t border-black/5">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <h2 class="text-center text-sm font-medium tracking-wide text-ink-soft uppercase">Avec le soutien de</h2>
+    <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+      {liste.map((f) => (
+        <li class="flex h-14 items-center">
+          {f.image ? (
+            <Image src={f.image} alt={f.nom} height={f.image.height} class="h-12 w-auto max-w-full object-contain sm:h-14" />
+          ) : (
+            <span class="text-center text-sm leading-snug font-medium text-ink/60">{f.nom}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

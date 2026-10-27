@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/Photo.astro';
 import ListeActus from '../components/ListeActus.astro';
 import Partenaires from '../components/Partenaires.astro';
+import Financeurs from '../components/Financeurs.astro';
 import { getCollection } from 'astro:content';
 import { links } from '../config/site';
 import { chiffres } from '../config/association';
@@ -32,7 +33,7 @@ const engagements = [
       <div>
         <p class="text-sm font-medium tracking-wide text-accent uppercase">LEPAM Mayotte</p>
         <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
-          Ensemble, on ouvre des <span class="text-gradient">horizons</span> à la jeunesse de Petite-Terre.
+          Luttons ensemble pour un <span class="text-gradient">avenir meilleur</span>.
         </h1>
         <p class="mt-6 max-w-lg text-lg text-ink-soft">
           Depuis 2022, nous menons des projets d'éducation, de mobilité, d'environnement, de patrimoine et d'insertion à Mayotte.
@@ -117,4 +118,5 @@ const engagements = [
   </section>
 
   <Partenaires />
+  <Financeurs />
 </BaseLayout>

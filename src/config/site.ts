@@ -19,6 +19,16 @@ export const site = {
   ],
 };
 
+// Informations légales, affichées dans les mentions légales (« À compléter » tant qu'elles sont vides)
+export const legal = {
+  forme: 'Association loi 1901',
+  rna: '', // numéro RNA, commence par W (registre des associations)
+  siret: '', // si l'association en a un
+  siege: site.address, // à modifier si le siège est différent du tiers-lieu
+  responsablePublication: '', // en général le ou la président·e
+  miseAJour: '27 octobre 2026',
+};
+
 // À la bascule du domaine, remplacer www.lepammayotte.fr par le sous-domaine AssoConnect.
 const assoconnect = 'https://www.lepammayotte.fr';
 

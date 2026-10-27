@@ -9,12 +9,27 @@
   # Même version de Node qu'en local (Astro demande au moins Node 22.23)
   NODE_VERSION = "24"
 
-# Phase d'aperçu : on demande aux moteurs de recherche de ne pas indexer le site.
-# À SUPPRIMER le jour où lepammayotte.fr pointe vers ce site.
 [[headers]]
   for = "/*"
   [headers.values]
+    # Phase d'aperçu : on demande aux moteurs de recherche de ne pas indexer le site.
+    # À SUPPRIMER le jour où lepammayotte.fr pointe vers ce site.
     X-Robots-Tag = "noindex, nofollow"
+
+    # Sécurité : le navigateur n'exécute que les fichiers du site lui-même.
+    # Seule exception : la carte OpenStreetMap (frame-src). Si on ajoute un service externe
+    # (vidéo YouTube intégrée, formulaire AssoConnect en iframe…), il faut l'autoriser ici.
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self' data:; frame-src https://www.openstreetmap.org; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+    # Interdit d'afficher le site dans une iframe d'un autre site (protection contre le « clickjacking »)
+    X-Frame-Options = "DENY"
+    # Empêche le navigateur de deviner le type d'un fichier
+    X-Content-Type-Options = "nosniff"
+    # N'envoie que le nom du site (pas l'adresse complète des pages) aux sites liés
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Le site n'a besoin ni de la caméra, ni du micro, ni de la localisation
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    # Toujours en HTTPS
+    Strict-Transport-Security = "max-age=31536000"
 
 # Les images optimisées par Astro ne changent jamais de nom : on les garde en cache un an.
 [[headers]]

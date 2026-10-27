@@ -35,6 +35,8 @@ const itineraire = `https://www.openstreetmap.org/directions?to=${lat},${lon}`;
       src={carte}
       title={`Carte : ${adresse}`}
       loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
       class="h-80 w-full border-0 md:col-span-3 md:h-full md:min-h-96"
     ></iframe>
   </div>

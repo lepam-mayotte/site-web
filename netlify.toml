@@ -1,0 +1,23 @@
+# Configuration de l'hébergement Netlify.
+# Netlify reconstruit et publie le site à chaque « git push » sur la branche main.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Même version de Node qu'en local (Astro demande au moins Node 22.23)
+  NODE_VERSION = "24"
+
+# Phase d'aperçu : on demande aux moteurs de recherche de ne pas indexer le site.
+# À SUPPRIMER le jour où lepammayotte.fr pointe vers ce site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Les images optimisées par Astro ne changent jamais de nom : on les garde en cache un an.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

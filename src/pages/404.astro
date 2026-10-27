@@ -1,0 +1,18 @@
+---
+// Page affichée quand une adresse n'existe pas (Netlify sert automatiquement 404.html).
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page introuvable">
+  <section class="mx-auto flex max-w-3xl flex-col items-center px-4 py-24 text-center sm:px-6 md:py-32">
+    <p class="text-gradient text-8xl font-semibold tracking-tight">404</p>
+    <h1 class="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl">Cette page n'existe pas.</h1>
+    <p class="mt-4 max-w-md text-lg text-ink-soft">
+      Elle a peut-être été déplacée, ou l'adresse contient une erreur.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href="/" class="rounded-full bg-ink px-6 py-3 font-medium text-white transition hover:bg-ink/85">Retour à l'accueil</a>
+      <a href="/actions" class="rounded-full px-6 py-3 font-medium ring-1 ring-black/10 transition hover:ring-black/20">Nos actions</a>
+    </div>
+  </section>
+</BaseLayout>

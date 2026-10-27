@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "@fontsource-variable/instrument-sans";
+
+/* Couleurs et typographie de LEPAM, reprises du logo (dégradé rouge → orange sur blanc) */
+@theme {
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-red: #e6334c;
+  --color-brand-orange: #f39323;
+  --color-brand-50: #fff7ef;
+  --color-brand-100: #ffebd6;
+
+  --color-ink: #1d1d1f;
+  --color-ink-soft: #6e6e73;
+  --color-mist: #f5f5f7;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth bg-white text-ink antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-orange;
+  }
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(90deg, var(--color-brand-red), var(--color-brand-orange));
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gradient-brand {
+  background-image: linear-gradient(120deg, var(--color-brand-red), var(--color-brand-orange));
+}
+
+/* Apparition douce au défilement, désactivée si l'utilisateur limite les animations */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

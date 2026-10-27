@@ -1,12 +1,21 @@
 @import "tailwindcss";
 @import "@fontsource-variable/instrument-sans";
 
-/* Couleurs et typographie de LEPAM, reprises du logo (dégradé rouge → orange sur blanc) */
+/* Couleurs et typographie de LEPAM, relevées sur le logo (dégradé rose → corail → jaune) */
 @theme {
   --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
 
-  --color-brand-red: #e6334c;
-  --color-brand-orange: #f39323;
+  /* Couleurs exactes du logo, pour les éléments décoratifs */
+  --color-brand-pink: #ec4a8a;
+  --color-brand-coral: #f07c63;
+  --color-brand-orange: #f8a656;
+  --color-brand-yellow: #fbc53f;
+
+  /* Variantes plus foncées pour le texte et les fonds sous texte blanc (contraste AA) */
+  --color-accent: #c42d6c;
+  --color-accent-from: #d63579;
+  --color-accent-to: #e0643a;
+
   --color-brand-50: #fff7ef;
   --color-brand-100: #ffebd6;
 
@@ -21,18 +30,18 @@
   }
 
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-orange;
+    @apply outline-2 outline-offset-2 outline-accent;
   }
 }
 
 @utility text-gradient {
-  background-image: linear-gradient(90deg, var(--color-brand-red), var(--color-brand-orange));
+  background-image: linear-gradient(90deg, var(--color-accent-from), var(--color-accent-to));
   background-clip: text;
   color: transparent;
 }
 
 @utility bg-gradient-brand {
-  background-image: linear-gradient(120deg, var(--color-brand-red), var(--color-brand-orange));
+  background-image: linear-gradient(120deg, var(--color-accent-from), var(--color-accent-to));
 }
 
 /* Apparition douce au défilement, désactivée si l'utilisateur limite les animations */

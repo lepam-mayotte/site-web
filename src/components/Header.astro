@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
+import embleme from '../assets/logo-embleme.png';
 import { nav } from '../config/site';
 
 const current = Astro.url.pathname;
@@ -9,7 +9,7 @@ const current = Astro.url.pathname;
 <header class="sticky top-0 z-40 border-b border-black/5 bg-white/80 backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6">
     <a href="/" class="flex shrink-0 items-center gap-2" aria-label="LEPAM Mayotte, accueil">
-      <Image src={logo} alt="" width={40} height={50} class="h-10 w-auto" />
+      <Image src={embleme} alt="" height={72} class="h-9 w-auto" />
       <span class="text-lg font-semibold tracking-tight">LEPAM</span>
     </a>
 

@@ -1,0 +1,149 @@
+---
+// Modèle commun des 5 pages thématiques. Le contenu vient de src/content/thematiques/<slug>.md
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Photo from '../../components/Photo.astro';
+import Galerie from '../../components/Galerie.astro';
+import ListeActus from '../../components/ListeActus.astro';
+import { links } from '../../config/site';
+import { photosDu } from '../../lib/photos';
+
+export async function getStaticPaths() {
+  const thematiques = await getCollection('thematiques');
+  return thematiques.map((thematique) => ({ params: { slug: thematique.id }, props: { thematique } }));
+}
+
+const { thematique } = Astro.props;
+const t = thematique.data;
+const { Content } = await render(thematique);
+
+// Photos déposées dans src/assets/photos/<slug>/
+const { bandeau, galerie } = photosDu(thematique.id);
+
+const autres = (await getCollection('thematiques'))
+  .filter((autre) => autre.id !== thematique.id)
+  .sort((a, b) => a.data.ordre - b.data.ordre);
+
+const aDesActus = (await getCollection('actus', (a) => a.data.thematique.id === thematique.id)).length > 0;
+---
+
+<BaseLayout title={t.titre} description={t.resume}>
+  <!-- 1. Bandeau -->
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0 -z-10">
+      <Photo image={bandeau} label={t.photo} loading="eager" class="size-full" />
+    </div>
+    <div class="bg-gradient-to-t from-ink/75 via-ink/30 to-transparent">
+      <div class="mx-auto flex min-h-[60vh] max-w-6xl flex-col justify-end px-4 pt-32 pb-14 text-white sm:px-6 md:min-h-[70vh]">
+        <nav aria-label="Fil d'Ariane" class="text-sm text-white/80">
+          <a href="/actions" class="hover:text-white">Nos actions</a>
+          <span aria-hidden="true" class="mx-2">›</span>
+          <span aria-current="page">{t.titre}</span>
+        </nav>
+        <h1 class="mt-3 max-w-3xl text-5xl font-semibold tracking-tight text-balance sm:text-7xl">{t.titre}</h1>
+        <p class="mt-4 max-w-2xl text-xl text-white/90 sm:text-2xl">{t.accroche}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Présentation : objectif et public visé -->
+  <section class="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-5 md:py-28">
+    <div class="space-y-5 text-xl leading-relaxed text-ink/85 md:col-span-3">
+      <Content />
+    </div>
+    <dl class="space-y-6 rounded-3xl bg-brand-50 p-8 md:col-span-2">
+      <div>
+        <dt class="text-sm font-medium tracking-wide text-accent uppercase">Objectif</dt>
+        <dd class="mt-2 text-ink/85">{t.objectif}</dd>
+      </div>
+      <div>
+        <dt class="text-sm font-medium tracking-wide text-accent uppercase">Public visé</dt>
+        <dd class="mt-2 text-ink/85">{t.public}</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 3. Actions concrètes et chiffres clés -->
+  {(t.chiffres.length > 0 || t.actions.length > 0) && (
+    <section class="bg-mist">
+      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+        <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Ce que nous faisons</h2>
+
+        {t.chiffres.length > 0 && (
+          <dl class="mt-12 grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-4">
+            {t.chiffres.map((c) => (
+              <div class="reveal flex flex-col-reverse justify-end">
+                <dt class="mt-2 text-ink-soft">{c.label}</dt>
+                <dd class="text-gradient text-5xl font-semibold tracking-tight sm:text-6xl">{c.valeur}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
+
+        {t.actions.length > 0 && (
+          <ul class="mt-14 grid gap-4 md:grid-cols-2">
+            {t.actions.map((action) => (
+              <li class="reveal rounded-3xl bg-white p-8 ring-1 ring-black/5">
+                <h3 class="text-2xl font-semibold tracking-tight">{action.titre}</h3>
+                <p class="mt-3 text-lg text-ink-soft">{action.texte}</p>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- 4. Galerie photos -->
+  {galerie.length > 0 && (
+    <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
+      <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">En images</h2>
+      <div class="mt-12">
+        <Galerie photos={galerie} />
+      </div>
+    </section>
+  )}
+
+  <!-- 5. Actualités liées -->
+  {aDesActus && (
+    <section class="bg-mist">
+      <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div class="flex items-end justify-between gap-4">
+          <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Actualités</h2>
+          <a href="/actualites" class="shrink-0 font-medium text-accent hover:underline">Tout voir ›</a>
+        </div>
+        <div class="mt-10">
+          <ListeActus thematique={thematique.id} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- 6. Appel à l'action -->
+  <section class="px-4 py-20 sm:px-6">
+    <div class="bg-gradient-brand mx-auto max-w-6xl rounded-[2rem] px-6 py-16 text-center text-white sm:py-20">
+      <h2 class="mx-auto max-w-2xl text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{t.appel.titre}</h2>
+      <p class="mx-auto mt-4 max-w-xl text-lg text-white/85">{t.appel.texte}</p>
+      <div class="mt-9 flex flex-wrap justify-center gap-3">
+        <a href="/contact" class="rounded-full bg-white px-6 py-3 font-medium text-accent transition hover:bg-white/90">Participer</a>
+        <a href={links.adhesion} class="rounded-full bg-white/15 px-6 py-3 font-medium text-white ring-1 ring-white/50 transition hover:bg-white/25">Adhérer</a>
+        <a href={links.don} class="rounded-full bg-white/15 px-6 py-3 font-medium text-white ring-1 ring-white/50 transition hover:bg-white/25">Faire un don</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Autres thématiques -->
+  <nav aria-label="Autres thématiques" class="mx-auto max-w-6xl px-4 pb-24 sm:px-6">
+    <h2 class="text-sm font-medium tracking-wide text-ink-soft uppercase">Nos autres actions</h2>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+      {autres.map((autre) => (
+        <li>
+          <a href={`/actions/${autre.id}`} class="block h-full rounded-2xl p-5 ring-1 ring-black/10 transition hover:ring-brand-orange">
+            <p class="font-semibold tracking-tight">{autre.data.titre}</p>
+            <p class="mt-1 text-sm text-ink-soft">{autre.data.accroche}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</BaseLayout>

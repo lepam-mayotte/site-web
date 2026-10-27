@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import logoComplet from '../assets/logo-complet.png';
 import { links, nav, site } from '../config/site';
 
 const year = new Date().getFullYear();
@@ -7,8 +9,7 @@ const year = new Date().getFullYear();
 <footer class="bg-mist text-sm text-ink-soft">
   <div class="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
     <div class="md:col-span-2">
-      <p class="text-base font-semibold text-ink">{site.name}</p>
-      <p class="mt-1 max-w-xs">{site.fullName}</p>
+      <Image src={logoComplet} alt={`${site.name}, ${site.fullName}`} width={224} class="size-28 rounded-full bg-white" />
       <p class="mt-4">{site.address}</p>
       <a href={`mailto:${site.email}`} class="mt-1 inline-block hover:text-ink">{site.email}</a>
     </div>

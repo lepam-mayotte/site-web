@@ -1,0 +1,35 @@
+---
+// Liste des dernières actualités, toutes thématiques confondues ou filtrées sur une seule.
+import { getCollection } from 'astro:content';
+
+interface Props {
+  thematique?: string;
+  limite?: number;
+}
+
+const { thematique, limite = 3 } = Astro.props;
+
+const actus = (await getCollection('actus', (a) => !thematique || a.data.thematique.id === thematique))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, limite);
+
+const thematiques = await getCollection('thematiques');
+const nomThematique = (id: string) => thematiques.find((t) => t.id === id)?.data.titre;
+const formatDate = (date: Date) =>
+  date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+{actus.length > 0 && (
+  <ul class="grid gap-6 md:grid-cols-3">
+    {actus.map((actu) => (
+      <li class="reveal">
+        <a href={`/actualites/${actu.id}`} class="group block h-full rounded-3xl bg-white p-7 shadow-sm ring-1 ring-black/5 transition hover:-translate-y-1 hover:shadow-md">
+          <p class="text-xs font-medium tracking-wide text-accent uppercase">{nomThematique(actu.data.thematique.id)}</p>
+          <h3 class="mt-3 text-xl font-semibold tracking-tight">{actu.data.titre}</h3>
+          <p class="mt-3 text-ink-soft">{actu.data.resume}</p>
+          <p class="mt-6 text-sm text-ink-soft">{formatDate(actu.data.date)}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}

@@ -2,10 +2,21 @@
 // Page d'accueil : accroche en deux colonnes, thématiques en grille, chiffres, actualités, engagement.
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/Photo.astro';
-import DernieresActus from '../components/home/DernieresActus.astro';
-import Partenaires from '../components/home/Partenaires.astro';
+import ListeActus from '../components/ListeActus.astro';
+import Partenaires from '../components/Partenaires.astro';
+import { getCollection } from 'astro:content';
 import { links } from '../config/site';
-import { chiffres, thematiques } from '../config/thematiques';
+import { chiffres } from '../config/association';
+import { photosDu } from '../lib/photos';
+
+const thematiques = (await getCollection('thematiques')).sort((a, b) => a.data.ordre - b.data.ordre);
+
+// Mosaïque de l'accroche : les 3 premières photos de src/assets/photos/accueil/
+const accueil = photosDu('accueil').galerie;
+const mosaique = ['Mobilité à Nosy Be', 'Plage des Badamiers', 'Tiers-lieu'].map((legende, i) => ({
+  image: accueil[i]?.src,
+  label: accueil[i]?.alt ?? legende,
+}));
 
 const engagements = [
   { titre: 'Adhérer', texte: 'Devenez membre et participez à la vie de l’association.', href: links.adhesion },
@@ -19,7 +30,7 @@ const engagements = [
   <section class="bg-brand-50">
     <div class="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 md:grid-cols-2 md:py-24">
       <div>
-        <p class="text-sm font-medium tracking-wide text-brand-red uppercase">LEPAM Mayotte</p>
+        <p class="text-sm font-medium tracking-wide text-accent uppercase">LEPAM Mayotte</p>
         <h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
           Ensemble, on ouvre des <span class="text-gradient">horizons</span> à la jeunesse de Petite-Terre.
         </h1>
@@ -32,9 +43,9 @@ const engagements = [
         </div>
       </div>
       <div class="grid grid-cols-2 gap-4">
-        <Photo label="Mobilité à Nosy Be" class="row-span-2 aspect-[3/4] h-full rounded-3xl" />
-        <Photo label="Plage des Badamiers" class="aspect-square rounded-3xl" />
-        <Photo label="Tiers-lieu" class="aspect-square rounded-3xl" />
+        <Photo {...mosaique[0]} loading="eager" sizes="(min-width: 768px) 25vw, 50vw" class="row-span-2 aspect-[3/4] h-full rounded-3xl" />
+        <Photo {...mosaique[1]} loading="eager" sizes="(min-width: 768px) 25vw, 50vw" class="aspect-square rounded-3xl" />
+        <Photo {...mosaique[2]} loading="eager" sizes="(min-width: 768px) 25vw, 50vw" class="aspect-square rounded-3xl" />
       </div>
     </div>
   </section>
@@ -43,20 +54,20 @@ const engagements = [
   <section class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
     <div class="flex items-end justify-between gap-4">
       <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Nos actions</h2>
-      <a href="/actions" class="shrink-0 font-medium text-brand-red hover:underline">Tout voir ›</a>
+      <a href="/actions" class="shrink-0 font-medium text-accent hover:underline">Tout voir ›</a>
     </div>
     <p class="mt-3 max-w-xl text-lg text-ink-soft">Cinq pôles, une même ambition : donner à chacun les moyens de construire son avenir.</p>
 
     <ul class="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2">
       {thematiques.map((t, i) => (
         <li class:list={['reveal', i === 0 && 'md:row-span-2']}>
-          <a href={`/actions/${t.slug}`} class="group relative flex h-full min-h-64 overflow-hidden rounded-3xl">
+          <a href={`/actions/${t.id}`} class="group relative flex h-full min-h-64 overflow-hidden rounded-3xl">
             <div class="absolute inset-0 transition duration-500 group-hover:scale-105">
-              <Photo label={t.photo} class="size-full" />
+              <Photo image={photosDu(t.id).bandeau} label={t.data.photo} sizes="(min-width: 768px) 33vw, 100vw" class="size-full" />
             </div>
             <div class="relative mt-auto w-full bg-gradient-to-t from-ink/80 via-ink/40 to-transparent p-6 pt-20 text-white">
-              <h3 class="text-2xl font-semibold tracking-tight">{t.titre}</h3>
-              <p class="mt-1 text-white/85">{t.accroche}</p>
+              <h3 class="text-2xl font-semibold tracking-tight">{t.data.titre}</h3>
+              <p class="mt-1 text-white/85">{t.data.accroche}</p>
             </div>
           </a>
         </li>
@@ -81,10 +92,10 @@ const engagements = [
     <div class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
       <div class="flex items-end justify-between gap-4">
         <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Actualités</h2>
-        <a href="/actualites" class="shrink-0 font-medium text-brand-red hover:underline">Tout voir ›</a>
+        <a href="/actualites" class="shrink-0 font-medium text-accent hover:underline">Tout voir ›</a>
       </div>
       <div class="mt-10">
-        <DernieresActus />
+        <ListeActus />
       </div>
     </div>
   </section>
@@ -98,7 +109,7 @@ const engagements = [
           <a href={e.href} class="block h-full rounded-3xl p-8 ring-1 ring-black/10 transition hover:ring-brand-orange">
             <h3 class="text-gradient text-2xl font-semibold tracking-tight">{e.titre}</h3>
             <p class="mt-3 text-ink-soft">{e.texte}</p>
-            <p class="mt-6 font-medium text-brand-red">Continuer ›</p>
+            <p class="mt-6 font-medium text-accent">Continuer ›</p>
           </a>
         </li>
       ))}

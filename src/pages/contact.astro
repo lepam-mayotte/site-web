@@ -1,0 +1,85 @@
+---
+// Coordonnées, contacts directs selon le besoin et carte du tiers-lieu.
+import { getEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Carte from '../components/Carte.astro';
+import { candidatures, site } from '../config/site';
+
+// L'adresse, les horaires et la position viennent de la fiche du tiers-lieu
+const lieu = (await getEntry('thematiques', 'tiers-lieu'))?.data.lieu;
+
+const coordonnees = [
+  { label: 'Téléphone', valeur: site.telephone, href: site.telephoneLien },
+  { label: 'E-mail', valeur: site.email, href: `mailto:${site.email}` },
+  { label: 'Adresse', valeur: site.address },
+];
+
+const besoins = [
+  { titre: 'Réserver une salle ou du matériel', texte: 'Coworking, réunion, formation : écrivez à l’équipe du tiers-lieu.', href: candidatures.reservation, lien: 'tiers-lieu@lepammayotte.com' },
+  { titre: 'Devenir bénévole', texte: 'Rejoignez-nous lors de nos prochaines actions.', href: '/s-engager#benevolat', lien: 'Voir comment s’engager' },
+  { titre: 'Service civique', texte: 'Envoyez votre candidature à notre équipe.', href: candidatures.serviceCivique, lien: 'rh@lepammayotte.com' },
+  { titre: 'Partenariat ou presse', texte: 'Une idée de projet, une demande d’information ?', href: `mailto:${site.email}`, lien: site.email },
+];
+
+const reseaux = site.socials.filter((r) => r.url);
+---
+
+<BaseLayout title="Contact" description={`Contactez LEPAM Mayotte : ${site.telephone}, ${site.email}, ${site.address}.`}>
+  <!-- Introduction et coordonnées -->
+  <section class="bg-brand-50">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6 md:py-24">
+      <p class="text-sm font-medium tracking-wide text-accent uppercase">Contact</p>
+      <h1 class="mt-4 max-w-3xl text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
+        Parlons de votre <span class="text-gradient">projet</span>.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-ink-soft">
+        Une question, une envie de participer, un besoin de salle ? Notre équipe vous répond.
+      </p>
+
+      <dl class="mt-12 grid gap-4 md:grid-cols-3">
+        {coordonnees.map((c) => (
+          <div class="flex flex-col-reverse justify-end rounded-3xl bg-white p-6 ring-1 ring-black/5">
+            <dt class="text-sm font-medium tracking-wide text-accent uppercase">{c.label}</dt>
+            <dd class="mb-2 text-xl font-semibold tracking-tight break-words">
+              {c.href ? <a href={c.href} class="hover:text-accent">{c.valeur}</a> : c.valeur}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+      {reseaux.length > 0 && (
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <p class="text-sm text-ink-soft">Suivez-nous :</p>
+          <ul class="flex flex-wrap gap-2">
+            {reseaux.map((r) => (
+              <li><a href={r.url} class="block rounded-full bg-white px-4 py-2 text-sm font-medium ring-1 ring-black/10 transition hover:ring-accent">{r.nom}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Contacts selon le besoin -->
+  <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-24">
+    <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Selon votre demande</h2>
+    <ul class="mt-12 grid gap-4 sm:grid-cols-2">
+      {besoins.map((b) => (
+        <li class="reveal">
+          <a href={b.href} class="group flex h-full flex-col rounded-3xl p-8 ring-1 ring-black/10 transition hover:ring-accent">
+            <h3 class="text-2xl font-semibold tracking-tight">{b.titre}</h3>
+            <p class="mt-2 flex-1 text-lg text-ink-soft">{b.texte}</p>
+            <p class="mt-6 font-medium break-words text-accent group-hover:underline">{b.lien} <span aria-hidden="true">›</span></p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Carte du tiers-lieu -->
+  {lieu && (
+    <div class="pb-24">
+      <Carte {...lieu} />
+    </div>
+  )}
+</BaseLayout>

@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
     <div class="md:col-span-2">
       <Image src={logoComplet} alt={`${site.name}, ${site.fullName}`} width={224} class="size-28 rounded-full bg-white" />
       <p class="mt-4">{site.address}</p>
-      <a href={`tel:${site.telephone.replace(/\s/g, '')}`} class="mt-1 block hover:text-ink">{site.telephone}</a>
+      <a href={site.telephoneLien} class="mt-1 block hover:text-ink">{site.telephone}</a>
       <a href={`mailto:${site.email}`} class="mt-1 block hover:text-ink">{site.email}</a>
     </div>
 

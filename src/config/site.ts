@@ -9,6 +9,7 @@ export const site = {
   address: '53 boulevard des Amoureux, 97615 Labattoir',
   email: 'lepam@lepammayotte.com',
   telephone: '02 69 64 04 93',
+  telephoneLien: 'tel:+262269640493', // format international, pour appeler depuis n'importe quel téléphone
   // Un réseau sans adresse n'est pas affiché
   socials: [
     { nom: 'Facebook', url: '' }, // À compléter
@@ -34,6 +35,7 @@ const mail = (adresse: string, objet: string) => `mailto:${adresse}?subject=${en
 export const candidatures = {
   benevolat: mail(site.email, 'Devenir bénévole'),
   serviceCivique: mail('rh@lepammayotte.com', 'Candidature service civique'),
+  reservation: mail('tiers-lieu@lepammayotte.com', 'Réservation au tiers-lieu'),
 };
 
 export const nav = [

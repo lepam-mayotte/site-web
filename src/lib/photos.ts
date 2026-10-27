@@ -18,7 +18,11 @@ export interface PhotoDossier {
 const nomDeFichier = (chemin: string) => chemin.split('/').pop()!.replace(/\.[^.]+$/, '');
 
 const texteAlternatif = (nom: string) => {
-  const texte = nom.replace(/^\d+[-_]/, '').replace(/[-_]+/g, ' ').trim();
+  const texte = nom
+    .replace(/^\d+[-_]/, '')
+    .replace(/[-_]+/g, ' ')
+    .replace(/\b([ldjnmst]) (?=[aeiouyh])/gi, "$1'") // « a l aeroport » → « a l'aeroport »
+    .trim();
   return texte.charAt(0).toUpperCase() + texte.slice(1);
 };
 

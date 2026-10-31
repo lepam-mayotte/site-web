@@ -1,7 +1,7 @@
 ---
 // Logo d'un réseau, lu dans src/assets/logos/reseaux/. Rien n'est affiché tant que le fichier n'est pas déposé.
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
+import { logoDans } from '../lib/logos';
 
 interface Props {
   logo: string;
@@ -10,13 +10,7 @@ interface Props {
 }
 
 const { logo, nom, class: className = '' } = Astro.props;
-
-const fichiers = import.meta.glob<{ default: ImageMetadata }>('/src/assets/logos/reseaux/*.{svg,png,jpg,jpeg,webp}', {
-  eager: true,
-});
-const image = Object.entries(fichiers).find(
-  ([chemin]) => chemin.split('/').pop()!.replace(/\.[^.]+$/, '') === logo,
-)?.[1].default;
+const image = logoDans('reseaux', logo);
 ---
 
-{image && <Image src={image} alt={`Logo ${nom}`} height={image.height} class:list={['w-auto object-contain', className]} />}
+{image && <Image src={image} alt={`Logo ${nom}`} height={image.height} class:list={['w-auto max-w-full object-contain object-left', className]} />}

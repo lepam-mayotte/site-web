@@ -14,36 +14,37 @@ export const chiffres = [
   { valeur: '15', label: 'associations accompagnées' },
 ];
 
+// Partenaires : logo dans src/assets/logos/partenaires/ ; sans logo, le nom s'affiche.
 export const partenaires = [
-  'Fondation de France',
-  'DEETS Mayotte',
-  'Erasmus+ Jeunesse & Sport',
-  'Agence du Service Civique',
-  'FONJEP',
-  'DRAJES Mayotte',
-  'Direction des affaires culturelles',
-  'Communauté de communes de Petite-Terre',
-  'Cité éducative de Petite-Terre',
-  'Ville de Dzaoudzi-Labattoir',
-  'CRESS Mayotte',
-  'France Travail',
-  'Mission Locale',
-  'World Central Kitchen',
-  'Action & Solidarité Mayotte Sud-Ouest',
-  'Grow e.V.',
-  'Startup Europe',
-  'Commission européenne',
-  'Nestlé',
+  { nom: "Guid'Asso Mayotte", logo: 'guid-asso' },
+  { nom: 'CRESS Mayotte', logo: 'cress-mayotte' },
+  { nom: 'World Central Kitchen', logo: 'world-central-kitchen' },
+  { nom: 'Nestlé', logo: 'nestle' },
+  { nom: 'Grow e.V.', logo: 'grow', petit: true },
+  { nom: "Mob'Helios Mayotte", logo: 'mob-helios' },
+  { nom: 'Apave Camas formation', logo: 'apave-camas-formation' },
+  { nom: 'Ville de Dzaoudzi-Labattoir', logo: 'ville-de-dzaoudzi-labattoir' },
+  { nom: 'France Travail', logo: 'france-travail' },
+  { nom: 'Mission Locale de Mayotte', logo: 'mission-locale' },
+  { nom: 'Action & Solidarité Mayotte Sud-Ouest' },
 ];
 
-// Financeurs, affichés avec leur logo sur l'accueil.
-// Le logo est lu dans src/assets/logos/financeurs/<logo>.(svg|png|jpg|webp) ;
-// tant qu'il n'est pas déposé, le nom s'affiche à sa place.
+// Financeurs : logo dans src/assets/logos/financeurs/ ; sans logo, le nom s'affiche.
 export const financeurs = [
   { nom: 'Financé par l’Union européenne · NextGenerationEU', logo: 'union-europeenne' },
   { nom: 'Plan d’investissement dans les compétences, République française et Agence nationale de la cohésion des territoires', logo: 'pic-republique-anct' },
   { nom: 'Préfet de Mayotte', logo: 'prefet-de-mayotte' },
   { nom: 'DEFFINOV · Tiers-lieux de formation', logo: 'deffinov' },
+  { nom: 'DEETS Mayotte', logo: 'deets' },
+  { nom: 'Fondation de France', logo: 'fondation-de-france' },
+  { nom: 'Erasmus+ Jeunesse & Sport', logo: 'erasmus-plus' },
+  { nom: 'FONJEP Solidarité internationale', logo: 'fonjep' },
+  { nom: 'Agence du Service Civique', logo: 'agence-service-civique' },
+  { nom: 'Délégation régionale académique à la jeunesse, à l’engagement et aux sports', logo: 'drajes' },
+  { nom: 'Direction des affaires culturelles', logo: 'direction-affaires-culturelles' },
+  { nom: 'Communauté de communes de Petite-Terre', logo: 'communaute-de-communes-petite-terre' },
+  { nom: 'Cité éducative de Petite-Terre', logo: 'cite-educative' },
+  { nom: 'Startup Europe, Commission européenne', logo: 'startup-europe' },
 ];
 
 // Textes de la page « L'association », repris du rapport d'activité 2025.

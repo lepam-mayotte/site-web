@@ -1,0 +1,31 @@
+---
+// Liste de logos centrée : le logo s'il existe dans src/assets/logos/<dossier>/, sinon le nom.
+import { Image } from 'astro:assets';
+import { logoDans } from '../lib/logos';
+
+interface Props {
+  titre: string;
+  dossier: string;
+  elements: { nom: string; logo?: string; petit?: boolean }[]; // petit : pour un logo visuellement très imposant
+}
+
+const { titre, dossier, elements } = Astro.props;
+const liste = elements.map((e) => ({ ...e, image: e.logo ? logoDans(dossier, e.logo) : undefined }));
+---
+
+<section class="border-t border-black/5">
+  <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+    <h2 class="text-center text-sm font-medium tracking-wide text-ink-soft uppercase">{titre}</h2>
+    <ul class="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-8">
+      {liste.map((e) => (
+        <li class="flex h-14 max-w-full items-center">
+          {e.image ? (
+            <Image src={e.image} alt={e.nom} height={e.image.height} class:list={['w-auto max-w-full object-contain', e.petit ? 'h-8 sm:h-9' : 'h-12 sm:h-14']} />
+          ) : (
+            <span class="max-w-40 text-center text-sm leading-snug font-medium text-ink/60">{e.nom}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

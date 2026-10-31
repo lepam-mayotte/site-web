@@ -16,7 +16,7 @@ export const site = {
     { nom: 'Instagram', url: 'https://www.instagram.com/lepam_976' },
     { nom: 'TikTok', url: 'https://www.tiktok.com/@lepam976' },
     { nom: 'Snapchat', url: 'https://www.snapchat.com/add/lepam976' },
-    { nom: 'LinkedIn', url: '' }, // À compléter
+    { nom: 'LinkedIn', url: 'https://www.linkedin.com/in/lepam-mayotte-7a033031a/' },
     { nom: 'YouTube', url: 'https://www.youtube.com/@lepam976' },
   ],
 };
@@ -24,11 +24,11 @@ export const site = {
 // Informations légales, affichées dans les mentions légales (« À compléter » tant qu'elles sont vides)
 export const legal = {
   forme: 'Association loi 1901',
-  rna: '', // numéro RNA, commence par W (registre des associations)
+  rna: 'W9T1007801',
   siret: '', // si l'association en a un
   siege: site.address, // à modifier si le siège est différent du tiers-lieu
-  responsablePublication: '', // en général le ou la président·e
-  miseAJour: '27 octobre 2026',
+  responsablePublication: 'ASSOUMANY Sarah-binti', // la présidente, représentante légale de l'association
+  miseAJour: '31 octobre 2026',
 };
 
 // À la bascule du domaine, remplacer www.lepammayotte.fr par le sous-domaine AssoConnect.
@@ -36,9 +36,9 @@ const assoconnect = 'https://www.lepammayotte.fr';
 
 export const links = {
   don: `${assoconnect}/collect/donation/01HK0J16JRJV40FZV0AE1GMBVC/campagne-de-dons-pour-soutenir-nos-projets-a-mayotte`,
-  adhesion: `${assoconnect}/page/3005861-adhesion`, // À remplacer par l'URL /collect/... du formulaire
+  adhesion: `${assoconnect}/collect/description/478651-b-devenir-benevole?header=%2Fpage%2F3005861-adhesion`,
   connexion: `${assoconnect}/contacts/login`, // Connexion des administrateurs à AssoConnect
-  cv: `${assoconnect}/page/2720178-deposer-un-cv`, // À remplacer par l'URL /collect/... du formulaire
+  cv: 'https://docs.google.com/forms/d/e/1FAIpQLScf8m8YUvc65_OvQwD067_rmv3hNhSGTLgnkxS1ITYjPe29gg/viewform', // formulaire Google
 };
 
 // Adresses e-mail des candidatures (ouvertes avec un objet prérempli)

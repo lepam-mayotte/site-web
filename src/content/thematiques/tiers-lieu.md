@@ -20,7 +20,7 @@ services:
   - titre: Espace de coworking
     texte: Un espace calme et connecté pour travailler, réviser ou avancer sur vos projets, seul ou à plusieurs.
   - titre: Location de salles
-    texte: Réservez une salle pour une réunion, une formation ou un atelier. Nos partenaires y organisent régulièrement leurs sessions.
+    texte: Réservez une salle pour une réunion, une formation ou un atelier. Les tarifs vous sont communiqués sur demande, par e-mail.
   - titre: Prêt de matériel
     texte: Le matériel dont vous avez besoin est réservable avec votre salle.
     elements:
@@ -29,7 +29,7 @@ services:
       - Tableau
       - Tablettes
   - titre: Accompagnement scolaire
-    texte: Pour les enfants de 8 à 12 ans scolarisés, avec un objectif clair, dire, lire, écrire et compter, et le soutien de la Cité éducative de Petite-Terre.
+    texte: Pour les enfants de 8 à 12 ans scolarisés, avec un objectif clair, dire, lire, écrire et compter, financé par la Cité éducative de Petite-Terre. Le samedi de 8h à 12h.
   - titre: Formations
     texte: Des salles équipées pour les organismes de formation, dont Aloalo, Atouts Formations, ESCGM, SMFP, CIFA OI, l'Institut Wakati, CAMAS et Nuevo.
   - titre: Numérique pour tous
@@ -49,12 +49,12 @@ actions:
     texte: Le Dithé littéraire, des ateliers et des temps d'échange qui font du tiers-lieu un lieu de vie ouvert à toutes et à tous.
 lieu:
   adresse: 53 boulevard des Amoureux, 97615 Labattoir
-  horaires: 8h – 16h # jours d'ouverture à préciser
+  horaires: Du lundi au vendredi, 8h – 16h. Le samedi, 8h – 12h pour l'accompagnement scolaire.
   lat: -12.786894
   lon: 45.278969
 appel:
   titre: Besoin d'un espace pour travailler ?
-  texte: Étudiants, salariés, freelances ou associations, écrivez-nous pour réserver une salle et du matériel au tiers-lieu.
+  texte: Étudiants, salariés, freelances ou associations, écrivez-nous pour connaître les tarifs et réserver une salle et du matériel.
   bouton: Réserver une salle
   lien: mailto:tiers-lieu@lepammayotte.com
 ---

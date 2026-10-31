@@ -1,9 +1,12 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import logoComplet from '../assets/logo-complet.png';
 import { links, nav, site } from '../config/site';
 
 const year = new Date().getFullYear();
+// Les horaires viennent de la fiche du tiers-lieu
+const horaires = (await getEntry('thematiques', 'tiers-lieu'))?.data.lieu?.horaires;
 ---
 
 <footer class="bg-mist text-sm text-ink-soft">
@@ -11,6 +14,7 @@ const year = new Date().getFullYear();
     <div class="md:col-span-2">
       <Image src={logoComplet} alt={`${site.name}, ${site.fullName}`} width={224} class="size-28 rounded-full bg-white" />
       <p class="mt-4">{site.address}</p>
+      {horaires && <p class="mt-1">{horaires}</p>}
       <a href={site.telephoneLien} class="mt-1 block hover:text-ink">{site.telephone}</a>
       <a href={`mailto:${site.email}`} class="mt-1 block hover:text-ink">{site.email}</a>
     </div>

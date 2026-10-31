@@ -36,8 +36,12 @@ const sections = [
           <dd>{site.fullName} ({site.name})</dd>
           <dt>Forme juridique</dt>
           <dd>{legal.forme}</dd>
-          <dt>Numéro RNA</dt>
-          <dd>{legal.rna || <span class="a-completer">À compléter</span>}</dd>
+          {legal.rna && (
+            <>
+              <dt>Numéro RNA</dt>
+              <dd>{legal.rna}</dd>
+            </>
+          )}
           {legal.siret && (
             <>
               <dt>SIRET</dt>
@@ -51,7 +55,7 @@ const sections = [
           <dt>E-mail</dt>
           <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
           <dt>Responsable de la publication</dt>
-          <dd>{legal.responsablePublication || <span class="a-completer">À compléter</span>}</dd>
+          <dd>{legal.responsablePublication}</dd>
         </dl>
       </section>
 
@@ -86,6 +90,8 @@ const sections = [
         <h2>4. Données personnelles</h2>
         <p>
           Ce site ne contient aucun formulaire et ne collecte directement aucune donnée personnelle.
+          Le dépôt de CV se fait sur un formulaire externe, hébergé par Google : les informations transmises servent
+          uniquement à étudier les candidatures.
         </p>
         <p>
           Lorsque vous nous écrivez par e-mail, vos coordonnées sont utilisées uniquement pour vous répondre et ne sont jamais
@@ -147,9 +153,5 @@ const sections = [
   }
   .texte dt {
     @apply font-medium text-ink;
-  }
-  /* Repère visuel pour les informations manquantes */
-  .a-completer {
-    @apply rounded bg-yellow-100 px-2 py-0.5 text-yellow-900;
   }
 </style>

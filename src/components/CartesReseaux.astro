@@ -10,7 +10,7 @@ import { candidatures } from '../config/site';
   <ul class="mt-12 grid gap-4 md:grid-cols-2">
     {reseaux.map((r) => (
       <li id={r.id} class="flex scroll-mt-24 flex-col rounded-3xl bg-brand-50 p-8 sm:p-10">
-        <LogoReseau logo={r.logo} nom={r.nom} class="mb-6 h-14 self-start" />
+        <LogoReseau logo={r.logo} nom={r.nom} class="mb-6 h-14 self-start rounded-xl bg-white p-2" />
         <h3 class="text-2xl font-semibold tracking-tight text-balance">{r.court}</h3>
         <p class="mt-4 text-ink-soft">{r.presentation}</p>
         <p class="mt-4 text-ink/85">{r.role}</p>

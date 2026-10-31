@@ -5,6 +5,7 @@ import Photo from '../components/Photo.astro';
 import ListeActus from '../components/ListeActus.astro';
 import Partenaires from '../components/Partenaires.astro';
 import Financeurs from '../components/Financeurs.astro';
+import BandeauReseaux from '../components/BandeauReseaux.astro';
 import { getCollection } from 'astro:content';
 import { links } from '../config/site';
 import { chiffres } from '../config/association';
@@ -21,7 +22,7 @@ const mosaique = ['Mobilité à Nosy Be', 'Plage des Badamiers', 'Tiers-lieu'].m
 
 const engagements = [
   { titre: 'Adhérer', texte: 'Devenez membre et participez à la vie de l’association.', href: links.adhesion },
-  { titre: 'Faire un don', texte: 'Financez directement nos actions auprès des jeunes de Petite-Terre.', href: links.don },
+  { titre: 'Faire un don', texte: 'Financez directement nos actions auprès des jeunes de Mayotte.', href: links.don },
   { titre: 'Devenir bénévole', texte: 'Donnez un peu de votre temps lors de nos événements.', href: '/s-engager#benevolat' },
 ];
 ---
@@ -36,7 +37,7 @@ const engagements = [
           Luttons ensemble pour un <span class="text-gradient">avenir meilleur</span>.
         </h1>
         <p class="mt-6 max-w-lg text-lg text-ink-soft">
-          Depuis 2022, nous menons des projets d'éducation, de mobilité, d'environnement, de patrimoine et d'insertion à Mayotte.
+          Depuis 2022, nous menons des projets d'éducation, de mobilité, d'environnement, de patrimoine et d'insertion à Mayotte, et nous animons un tiers-lieu de compétences ouvert à tous.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={links.don} class="bg-gradient-brand rounded-full px-6 py-3 font-medium text-white shadow-sm transition hover:opacity-90">Faire un don</a>
@@ -50,6 +51,8 @@ const engagements = [
       </div>
     </div>
   </section>
+
+  <BandeauReseaux />
 
   <!-- Thématiques en grille -->
   <section class="mx-auto max-w-6xl px-4 py-24 sm:px-6">
@@ -78,8 +81,11 @@ const engagements = [
 
   <!-- Chiffres clés -->
   <section class="bg-gradient-brand text-white">
-    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-4">
-      {chiffres.map((c) => (
+    <div class="mx-auto max-w-6xl px-4 pt-16 sm:px-6">
+      <h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">Nos chiffres clés 2025</h2>
+    </div>
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-x-6 gap-y-10 px-4 pt-10 pb-16 sm:px-6 md:grid-cols-4">
+      {chiffres.slice(0, 4).map((c) => (
         <div>
           <p class="text-5xl font-semibold tracking-tight">{c.valeur}</p>
           <p class="mt-2 text-white/85">{c.label}</p>

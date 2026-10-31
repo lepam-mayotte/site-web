@@ -3,6 +3,10 @@
 export const dateLongue = (date: Date) =>
   date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Indian/Mayotte' });
 
+// Pour une actualité dont on ne connaît que le mois (voir « dateAuMois »)
+export const moisEtAnnee = (date: Date) =>
+  date.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric', timeZone: 'Indian/Mayotte' });
+
 export const jourEtMois = (date: Date) => ({
   jour: date.toLocaleDateString('fr-FR', { day: 'numeric', timeZone: 'Indian/Mayotte' }),
   mois: date.toLocaleDateString('fr-FR', { month: 'short', timeZone: 'Indian/Mayotte' }).replace('.', ''),

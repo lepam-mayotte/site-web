@@ -132,6 +132,17 @@ const aDesActus = (await getCollection('actus', (a) => a.data.thematique.id === 
     </section>
   )}
 
+  <!-- Encadré de mise en avant, si la thématique en a un -->
+  {t.encart && (
+    <section class="mx-auto max-w-6xl px-4 pt-20 sm:px-6 md:pt-28">
+      <div class="reveal rounded-[2rem] bg-ink p-8 text-white sm:p-12">
+        <h2 class="max-w-3xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">{t.encart.titre}</h2>
+        <p class="mt-4 max-w-3xl text-lg text-white/80">{t.encart.texte}</p>
+        <a href={t.encart.lien} class="mt-8 inline-block rounded-full bg-white px-6 py-3 font-medium text-ink transition hover:bg-white/90">{t.encart.bouton}</a>
+      </div>
+    </section>
+  )}
+
   <!-- 4. Galerie photos -->
   {galerie.length > 0 && (
     <section class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">

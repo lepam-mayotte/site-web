@@ -5,15 +5,17 @@ export const site = {
   name: 'LEPAM Mayotte',
   fullName: 'Luttons Ensemble pour un Avenir Meilleur à Mayotte',
   description:
-    "Association de Petite-Terre engagée pour l'éducation, la mobilité, l'insertion et la solidarité à Mayotte.",
+    "Association mahoraise engagée pour l'éducation, la mobilité, l'insertion et la solidarité, au service de toute la population de Mayotte.",
   address: '53 boulevard des Amoureux, 97615 Labattoir',
   email: 'lepam@lepammayotte.com',
   telephone: '02 69 64 04 93',
   telephoneLien: 'tel:+262269640493', // format international, pour appeler depuis n'importe quel téléphone
   // Un réseau sans adresse n'est pas affiché
   socials: [
-    { nom: 'Facebook', url: '' }, // À compléter
+    { nom: 'Facebook', url: 'https://www.facebook.com/p/LEPAM-100091974715737/' },
     { nom: 'Instagram', url: 'https://www.instagram.com/lepam_976' },
+    { nom: 'TikTok', url: 'https://www.tiktok.com/@lepam976' },
+    { nom: 'Snapchat', url: 'https://www.snapchat.com/add/lepam976' },
     { nom: 'LinkedIn', url: '' }, // À compléter
     { nom: 'YouTube', url: 'https://www.youtube.com/@lepam976' },
   ],
@@ -46,6 +48,7 @@ export const candidatures = {
   benevolat: mail(site.email, 'Devenir bénévole'),
   serviceCivique: mail('rh@lepammayotte.com', 'Candidature service civique'),
   reservation: mail('tiers-lieu@lepammayotte.com', 'Réservation au tiers-lieu'),
+  associations: mail(site.email, "Accompagnement Guid'Asso"),
 };
 
 export const nav = [

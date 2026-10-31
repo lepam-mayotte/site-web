@@ -24,6 +24,8 @@ const thematiques = defineCollection({
       .default([]),
     // À qui s'adressent les services (facultatif)
     publics: z.array(z.string()).default([]),
+    // Encadré de mise en avant, affiché après les actions (facultatif)
+    encart: z.object({ titre: z.string(), texte: z.string(), bouton: z.string(), lien: z.string() }).optional(),
     // Adresse et position GPS, pour afficher une carte (facultatif)
     lieu: z
       .object({ adresse: z.string(), horaires: z.string().optional(), lat: z.number(), lon: z.number() })
@@ -45,6 +47,7 @@ const actus = defineCollection({
   schema: z.object({
     titre: z.string(),
     date: z.coerce.date(),
+    dateAuMois: z.boolean().default(false), // vrai si seul le mois est connu : la date s'affiche « mai 2025 »
     thematique: reference('thematiques'),
     resume: z.string(),
     photo: z.string().optional(), // description de la photo bandeau.jpg (texte alternatif)

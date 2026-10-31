@@ -7,7 +7,7 @@ import Photo from '../../components/Photo.astro';
 import Galerie from '../../components/Galerie.astro';
 import ListeActus from '../../components/ListeActus.astro';
 import { photosDu } from '../../lib/photos';
-import { dateLongue, estAVenir } from '../../lib/dates';
+import { dateLongue, estAVenir, moisEtAnnee } from '../../lib/dates';
 
 export async function getStaticPaths() {
   const actus = await getCollection('actus');
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 
 const { actu } = Astro.props;
-const { titre, date, resume, photo, evenement } = actu.data;
+const { titre, date, dateAuMois, resume, photo, evenement } = actu.data;
 const { Content } = await render(actu);
 const thematique = await getEntry(actu.data.thematique);
 const { bandeau, galerie } = photosDu(`actus/${actu.id}`);
@@ -33,7 +33,7 @@ const { bandeau, galerie } = photosDu(`actus/${actu.id}`);
       <h1 class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">{titre}</h1>
       <p class="mt-4 text-xl text-ink-soft">{resume}</p>
       <p class="mt-6 text-sm text-ink-soft">
-        Publié le <time datetime={date.toISOString().slice(0, 10)}>{dateLongue(date)}</time>
+        {dateAuMois ? <time datetime={date.toISOString().slice(0, 7)}>{moisEtAnnee(date)}</time> : <>Publié le <time datetime={date.toISOString().slice(0, 10)}>{dateLongue(date)}</time></>}
       </p>
     </header>
 

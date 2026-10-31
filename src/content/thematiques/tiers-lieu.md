@@ -1,19 +1,21 @@
 ---
-# Première version rédigée à partir de l'ancien site : à faire valider par l'association.
-titre: Tiers-lieu
+# Textes rédigés à partir du rapport d'activité 2025 et de l'ancien site.
+titre: Tiers-lieu de compétences
 ordre: 1
 accroche: Un lieu ouvert à tout le territoire.
-resume: Coworking, salles et matériel à réserver, accompagnement scolaire et formations, à Labattoir.
-photo: Le tiers-lieu de compétences LEPAM à Labattoir
-objectif: Offrir à Petite-Terre un lieu équipé pour travailler, apprendre et se former, ouvert aux habitants comme aux structures du territoire.
+resume: "Notre tiers-lieu de compétences : coworking, salles et matériel à réserver, accompagnement scolaire et formations."
+photo: Réunion dans une salle équipée du tiers-lieu de compétences LEPAM
+objectif: Offrir à Mayotte un lieu équipé pour travailler, apprendre et se former, ouvert à tous les habitants comme aux structures du territoire.
 public: Étudiants, lycéens, salariés, freelances, demandeurs d'emploi, associations et entreprises.
 chiffres:
+  - valeur: "+6 000"
+    label: usagers accueillis en 2025
+  - valeur: "8"
+    label: centres de formation partenaires
+  - valeur: "115"
+    label: enfants accompagnés en 2025
   - valeur: "2024"
     label: inauguration du tiers-lieu de compétences
-  - valeur: "12"
-    label: agents de la mairie de Dzaoudzi-Labattoir formés
-  - valeur: "20"
-    label: participants au premier Dithé littéraire
 services:
   - titre: Espace de coworking
     texte: Un espace calme et connecté pour travailler, réviser ou avancer sur vos projets, seul ou à plusieurs.
@@ -27,9 +29,9 @@ services:
       - Tableau
       - Tablettes
   - titre: Accompagnement scolaire
-    texte: Les élèves suivis par LEPAM sont accompagnés au tiers-lieu en français et en mathématiques.
+    texte: Pour les enfants de 8 à 12 ans scolarisés, avec un objectif clair, dire, lire, écrire et compter, et le soutien de la Cité éducative de Petite-Terre.
   - titre: Formations
-    texte: Développement personnel, numérique, entrepreneuriat, avec nos partenaires comme ASLY, Mob'Helios ou OUJOUZI Consulting.
+    texte: Des salles équipées pour les organismes de formation, dont Aloalo, Atouts Formations, ESCGM, SMFP, CIFA OI, l'Institut Wakati, CAMAS et Nuevo.
   - titre: Numérique pour tous
     texte: Un accès gratuit aux ordinateurs et à Internet pour les demandeurs d'emploi, et des ateliers numériques avec Mednum.
 publics:
@@ -42,9 +44,9 @@ publics:
 titreActions: La vie du tiers-lieu
 actions:
   - titre: Un lieu pour nos partenaires
-    texte: Associations, organismes de formation et collectivités, comme la mairie de Dzaoudzi-Labattoir, y forment leurs équipes et y tiennent leurs réunions.
+    texte: En 2025, organismes de formation, associations, entreprises, France Travail, la Mission Locale, des institutions publiques et le sénateur de Mayotte ont utilisé nos salles, ainsi qu'une trentaine de lycéens et d'étudiants pour réviser.
   - titre: Rencontres et culture
-    texte: Le Dithé littéraire, des ateliers et des temps d'échange qui font du tiers-lieu un lieu de vie pour le quartier.
+    texte: Le Dithé littéraire, des ateliers et des temps d'échange qui font du tiers-lieu un lieu de vie ouvert à toutes et à tous.
 lieu:
   adresse: 53 boulevard des Amoureux, 97615 Labattoir
   horaires: 8h – 16h # jours d'ouverture à préciser
@@ -57,6 +59,6 @@ appel:
   lien: mailto:tiers-lieu@lepammayotte.com
 ---
 
-Inauguré en septembre 2024 avec le soutien du programme DEFFINOV Tiers-lieux de formation, le tiers-lieu de compétences de LEPAM est installé à Labattoir.
+Inauguré en septembre 2024 et lauréat du programme DEFFINOV, le tiers-lieu de compétences de LEPAM est un espace unique à Mayotte, où se rencontrent acteurs publics, entrepreneurs, jeunes et demandeurs d'emploi.
 
-C'est un espace de coworking ouvert à tous : on peut y réserver une salle et du matériel pour travailler, réviser ou se réunir. On y fait aussi de l'accompagnement scolaire, et les structures du territoire y organisent leurs formations et leurs réunions.
+Installé à Labattoir, il est ouvert à tous : on peut y réserver une salle et du matériel pour travailler, réviser ou se réunir. On y fait aussi de l'accompagnement scolaire, et les structures du territoire y organisent leurs formations et leurs réunions.

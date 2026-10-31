@@ -1,26 +1,37 @@
 ---
-# Première version rédigée à partir de l'ancien site : à faire valider par l'association.
+# Textes rédigés à partir du rapport d'activité 2025 et de l'ancien site.
 titre: Insertion professionnelle
 ordre: 3
 accroche: Accompagner chacun vers l’emploi.
-resume: Soutien scolaire, BAFA, service civique, forum des métiers et accompagnement vers l'emploi.
-photo: Jeunes accompagnés par LEPAM lors du forum des métiers
-objectif: Lutter contre le décrochage scolaire et accompagner les jeunes et les adultes de Petite-Terre jusqu'à la formation et l'emploi.
-public: Élèves en difficulté, jeunes en recherche d'orientation, demandeurs d'emploi et volontaires en service civique.
+resume: Suivi individualisé, ateliers collectifs et partenaires de l'emploi pour accompagner chacun vers la formation et l'emploi.
+photo: Atelier sur ordinateurs dans une salle de formation
+objectif: Accompagner les publics vers l'emploi, la formation et l'autonomie, avec un suivi individualisé et des actions collectives adaptées aux réalités du territoire.
+public: Jeunes sans emploi ni formation, habitants de quartiers prioritaires, personnes en précarité, demandeurs d'emploi de longue durée et volontaires en service civique.
+chiffres:
+  - valeur: "238"
+    label: bénéficiaires accompagnés en 2025
+  - valeur: "+40"
+    label: ateliers collectifs (CV, soft skills…)
+  - valeur: "25"
+    label: volontaires en service civique recrutés en 2025
+  - valeur: "+80 %"
+    label: des bénéficiaires sont des femmes
 actions:
-  - titre: Soutien scolaire
-    texte: Nous accompagnons les élèves en difficulté en français et en mathématiques, pour beaucoup allophones ou nouvellement arrivés, afin qu'ils gagnent en vocabulaire, en lecture et en autonomie.
+  - titre: Un suivi individualisé
+    texte: Diagnostic, entretiens réguliers, recherche d'emploi, orientation vers des formations, et accompagnement administratif et social.
+  - titre: Des ateliers collectifs
+    texte: Plus de 40 ateliers en 2025 pour préparer son CV, développer ses compétences et reprendre confiance.
+  - titre: Des partenaires mobilisés
+    texte: SMFP, Santé Sud, Mednum, ANAF, Axion Insertion, Randstad, la Mission Locale et France Travail travaillent à nos côtés sur la formation, la santé, le numérique et l'emploi.
   - titre: Service civique et BAFA
-    texte: L'association accueille des volontaires en service civique et forme des jeunes au BAFA, une première expérience pour s'engager et se professionnaliser.
-  - titre: Forum des métiers
-    texte: Une journée pour rencontrer des professionnels, découvrir des métiers et trouver sa voie.
-  - titre: Mobilisation à l'emploi
-    texte: Dépôt de CV, ateliers numériques et partenariat avec les acteurs de l'emploi, dont la démarche Territoire zéro chômeur de longue durée.
+    texte: L'association accueille des volontaires en service civique et accompagne des jeunes vers le BAFA, une première expérience pour s'engager et se professionnaliser.
+  - titre: Sur le terrain
+    texte: Forum des métiers, maraude de France Travail dans le quartier prioritaire de La Vigie, mobilisation avec la mairie de Tsingoni dans le projet Territoire zéro chômeur de longue durée.
 appel:
   titre: Vous cherchez une formation ou un emploi ?
-  texte: Élèves, familles ou demandeurs d'emploi, contactez-nous pour être accompagnés.
+  texte: Jeunes ou demandeurs d'emploi, contactez-nous pour être accompagnés.
 ---
 
-À Mayotte, plus de trois quarts des élèves de sixième ne maîtrisent pas la langue française, selon un rapport du Sénat de 2020. Sans accompagnement, beaucoup décrochent, puis peinent à trouver leur place dans la formation ou l'emploi.
+Plus de 80 % des personnes que nous accompagnons sont des femmes, majoritairement âgées de plus de 40 ans et peu qualifiées. Beaucoup sont confrontées à l'illettrisme, à l'illectronisme et à des freins administratifs.
 
-LEPAM agit à chaque étape : soutien scolaire pour les plus jeunes, premières expériences d'engagement avec le service civique et le BAFA, puis accompagnement vers l'emploi pour les jeunes et les adultes.
+Notre réponse : un accompagnement global, humain et personnalisé, pour permettre à chacun de retrouver confiance, compétences et accès à l'emploi.

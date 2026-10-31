@@ -1,0 +1,28 @@
+---
+// Section de la page « L'association » : le détail de chaque réseau.
+import LogoReseau from './LogoReseau.astro';
+import { reseaux } from '../config/association';
+import { candidatures } from '../config/site';
+---
+
+<section id="reseaux" class="mx-auto max-w-6xl scroll-mt-24 px-4 pt-20 sm:px-6 md:pt-28">
+  <h2 class="text-4xl font-semibold tracking-tight sm:text-5xl">Nos réseaux et engagements</h2>
+  <ul class="mt-12 grid gap-4 md:grid-cols-2">
+    {reseaux.map((r) => (
+      <li id={r.id} class="flex scroll-mt-24 flex-col rounded-3xl bg-brand-50 p-8 sm:p-10">
+        <LogoReseau logo={r.logo} nom={r.nom} class="mb-6 h-14 self-start" />
+        <h3 class="text-2xl font-semibold tracking-tight text-balance">{r.court}</h3>
+        <p class="mt-4 text-ink-soft">{r.presentation}</p>
+        <p class="mt-4 text-ink/85">{r.role}</p>
+        <ul class="mt-6 flex-1 list-disc space-y-2 pl-5 text-ink/85">
+          {r.points.map((point) => <li>{point}</li>)}
+        </ul>
+        {r.id === 'guid-asso' ? (
+          <a href={candidatures.associations} class="mt-8 self-start font-medium text-accent hover:underline">Demander un accompagnement ›</a>
+        ) : (
+          <a href="/actions/mobilite" class="mt-8 self-start font-medium text-accent hover:underline">Voir nos projets de mobilité ›</a>
+        )}
+      </li>
+    ))}
+  </ul>
+</section>

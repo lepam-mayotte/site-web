@@ -4,6 +4,7 @@ import { getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Carte from '../components/Carte.astro';
 import { candidatures, site } from '../config/site';
+import { reseaux } from '../config/association';
 
 // L'adresse, les horaires et la position viennent de la fiche du tiers-lieu
 const lieu = (await getEntry('thematiques', 'tiers-lieu'))?.data.lieu;
@@ -21,7 +22,8 @@ const besoins = [
   { titre: 'Partenariat ou presse', texte: 'Une idée de projet, une demande d’information ?', href: `mailto:${site.email}`, lien: site.email },
 ];
 
-const reseaux = site.socials.filter((r) => r.url);
+const reseauxSociaux = site.socials.filter((r) => r.url);
+const guidAsso = reseaux.find((r) => r.id === 'guid-asso')!;
 ---
 
 <BaseLayout title="Contact" description={`Contactez LEPAM Mayotte : ${site.telephone}, ${site.email}, ${site.address}.`}>
@@ -47,11 +49,11 @@ const reseaux = site.socials.filter((r) => r.url);
         ))}
       </dl>
 
-      {reseaux.length > 0 && (
+      {reseauxSociaux.length > 0 && (
         <div class="mt-8 flex flex-wrap items-center gap-3">
           <p class="text-sm text-ink-soft">Suivez-nous :</p>
           <ul class="flex flex-wrap gap-2">
-            {reseaux.map((r) => (
+            {reseauxSociaux.map((r) => (
               <li><a href={r.url} class="block rounded-full bg-white px-4 py-2 text-sm font-medium ring-1 ring-black/10 transition hover:ring-accent">{r.nom}</a></li>
             ))}
           </ul>
@@ -74,6 +76,21 @@ const reseaux = site.socials.filter((r) => r.url);
         </li>
       ))}
     </ul>
+  </section>
+
+  <!-- Accompagnement des associations -->
+  <section class="px-4 pb-20 sm:px-6 md:pb-24">
+    <div class="mx-auto max-w-6xl rounded-[2rem] bg-brand-50 p-8 sm:p-12">
+      <p class="text-sm font-medium tracking-wide text-accent uppercase">{guidAsso.court}</p>
+      <h2 class="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-balance sm:text-4xl">Vous avez une association ou un projet associatif ?</h2>
+      <p class="mt-4 max-w-3xl text-lg text-ink-soft">
+        Nous vous accompagnons gratuitement, dans le cadre du réseau Guid'Asso.
+      </p>
+      <ul class="mt-6 grid gap-3 md:grid-cols-3">
+        {guidAsso.points.map((point) => <li class="rounded-2xl bg-white p-5 ring-1 ring-black/5">{point}</li>)}
+      </ul>
+      <a href={candidatures.associations} class="mt-8 inline-block rounded-full bg-ink px-6 py-3 font-medium text-white transition hover:bg-ink/85">Demander un accompagnement</a>
+    </div>
   </section>
 
   <!-- Carte du tiers-lieu -->

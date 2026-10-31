@@ -36,3 +36,192 @@
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# Anciennes adresses du site AssoConnect : les liens déjà partagés continuent de fonctionner.
+[[redirects]]
+  from = "/page/2586868-accueil"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/page/2588329-accueil"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/page/2586866-activites"
+  to = "/actions"
+  status = 301
+
+[[redirects]]
+  from = "/page/2586869-qui-sommes-nous"
+  to = "/association"
+  status = 301
+
+[[redirects]]
+  from = "/page/2586872-qui-sommes-nous"
+  to = "/association"
+  status = 301
+
+[[redirects]]
+  from = "/page/3021214-guid-asso"
+  to = "/association#guid-asso"
+  status = 301
+
+[[redirects]]
+  from = "/page/3021202-guid-asso"
+  to = "/association#guid-asso"
+  status = 301
+
+[[redirects]]
+  from = "/page/4085540-guid-asso"
+  to = "/association#guid-asso"
+  status = 301
+
+[[redirects]]
+  from = "/page/3021718-tiers-lieu"
+  to = "/actions/tiers-lieu"
+  status = 301
+
+[[redirects]]
+  from = "/page/2720177-tiers-lieu"
+  to = "/actions/tiers-lieu"
+  status = 301
+
+[[redirects]]
+  from = "/page/2587748-accompagnement-scolaire"
+  to = "/actions/tiers-lieu"
+  status = 301
+
+[[redirects]]
+  from = "/page/4085780-accompagnement-scolaire"
+  to = "/actions/tiers-lieu"
+  status = 301
+
+[[redirects]]
+  from = "/page/2587760-solidarite-internationale"
+  to = "/actions/mobilite"
+  status = 301
+
+[[redirects]]
+  from = "/page/2991030-solidarite-international"
+  to = "/actions/mobilite"
+  status = 301
+
+[[redirects]]
+  from = "/page/3015100-discover-eu-erasmus"
+  to = "/actions/mobilite"
+  status = 301
+
+[[redirects]]
+  from = "/page/3015091-erasmus"
+  to = "/actions/mobilite"
+  status = 301
+
+[[redirects]]
+  from = "/page/4128324-nouvelles-team-a-nosy-be"
+  to = "/actions/mobilite"
+  status = 301
+
+[[redirects]]
+  from = "/page/4129378-restitution-nosy-be"
+  to = "/actions/mobilite"
+  status = 301
+
+[[redirects]]
+  from = "/page/3297302-jep"
+  to = "/actions/patrimoine"
+  status = 301
+
+[[redirects]]
+  from = "/page/4085769-jep"
+  to = "/actions/patrimoine"
+  status = 301
+
+[[redirects]]
+  from = "/page/4093600-journees-du-patrimoine-2026"
+  to = "/actions/patrimoine"
+  status = 301
+
+[[redirects]]
+  from = "/page/2587756-projets-culturels"
+  to = "/actions/patrimoine"
+  status = 301
+
+[[redirects]]
+  from = "/page/3614945-mobilisation-a-l-emploi"
+  to = "/actions/insertion"
+  status = 301
+
+[[redirects]]
+  from = "/page/3536002-forum-des-metiers"
+  to = "/actions/insertion"
+  status = 301
+
+[[redirects]]
+  from = "/page/2718519-offres-d-emploi"
+  to = "/s-engager#emploi"
+  status = 301
+
+[[redirects]]
+  from = "/page/2720178-deposer-un-cv"
+  to = "/s-engager#emploi"
+  status = 301
+
+[[redirects]]
+  from = "/page/2586870-contact-et-adhesion"
+  to = "/contact"
+  status = 301
+
+[[redirects]]
+  from = "/page/3005861-adhesion"
+  to = "/s-engager#adherer"
+  status = 301
+
+[[redirects]]
+  from = "/page/2586871-dons"
+  to = "/s-engager#don"
+  status = 301
+
+[[redirects]]
+  from = "/page/2595822-dons"
+  to = "/s-engager#don"
+  status = 301
+
+[[redirects]]
+  from = "/page/4129421-benevoles"
+  to = "/s-engager#benevolat"
+  status = 301
+
+[[redirects]]
+  from = "/page/4129423-benevoles"
+  to = "/s-engager#benevolat"
+  status = 301
+
+[[redirects]]
+  from = "/page/2595842-agenda"
+  to = "/actualites"
+  status = 301
+
+[[redirects]]
+  from = "/page/2595843-agenda"
+  to = "/actualites"
+  status = 301
+
+# Toutes les autres anciennes pages mènent à l'accueil
+[[redirects]]
+  from = "/page/*"
+  to = "/"
+  status = 301
+
+# Formulaires et comptes AssoConnect : en maintenance tant que le sous-domaine n'existe pas.
+# À REMPLACER par une redirection vers le sous-domaine AssoConnect dès qu'il sera en place.
+[[redirects]]
+  from = "/collect/*"
+  to = "/maintenance"
+  status = 302
+
+[[redirects]]
+  from = "/contacts/*"
+  to = "/maintenance"
+  status = 302

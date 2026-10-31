@@ -31,13 +31,16 @@ export const legal = {
   miseAJour: '31 octobre 2026',
 };
 
-// À la bascule du domaine, remplacer www.lepammayotte.fr par le sous-domaine AssoConnect.
+// Mettre à true quand AssoConnect aura son sous-domaine (remplacer aussi l'adresse ci-dessous) :
+// tous les boutons d'adhésion et de don retrouvent alors leur formulaire.
+const assoconnectActif = false;
 const assoconnect = 'https://www.lepammayotte.fr';
+const formulaire = (chemin: string) => (assoconnectActif ? `${assoconnect}${chemin}` : '/maintenance');
 
 export const links = {
-  don: `${assoconnect}/collect/donation/01HK0J16JRJV40FZV0AE1GMBVC/campagne-de-dons-pour-soutenir-nos-projets-a-mayotte`,
-  adhesion: `${assoconnect}/collect/description/478651-b-devenir-benevole?header=%2Fpage%2F3005861-adhesion`,
-  connexion: `${assoconnect}/contacts/login`, // Connexion des administrateurs à AssoConnect
+  don: formulaire('/collect/donation/01HK0J16JRJV40FZV0AE1GMBVC/campagne-de-dons-pour-soutenir-nos-projets-a-mayotte'),
+  adhesion: formulaire('/collect/description/478651-b-devenir-benevole?header=%2Fpage%2F3005861-adhesion'),
+  connexion: 'https://app.assoconnect.com/login', // Connexion des administrateurs, indépendante du domaine
   cv: 'https://docs.google.com/forms/d/e/1FAIpQLScf8m8YUvc65_OvQwD067_rmv3hNhSGTLgnkxS1ITYjPe29gg/viewform', // formulaire Google
 };
 

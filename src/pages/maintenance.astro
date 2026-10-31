@@ -1,0 +1,29 @@
+---
+// Page affichée à la place des formulaires AssoConnect tant que « assoconnectActif » vaut false
+// dans src/config/site.ts.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+
+const objet = encodeURIComponent('Adhésion ou don à LEPAM Mayotte');
+---
+
+<BaseLayout
+  title="Service bientôt disponible"
+  description="Les adhésions et les dons en ligne de LEPAM Mayotte sont temporairement indisponibles."
+>
+  <section class="mx-auto flex max-w-3xl flex-col items-center px-4 py-24 text-center sm:px-6 md:py-32">
+    <p class="text-sm font-medium tracking-wide text-accent uppercase">En maintenance</p>
+    <h1 class="mt-4 text-4xl font-semibold tracking-tight text-balance sm:text-6xl">
+      Ce service revient <span class="text-gradient">très bientôt</span>.
+    </h1>
+    <p class="mt-6 max-w-xl text-lg text-ink-soft">
+      Les adhésions, les dons et les inscriptions en ligne sont temporairement indisponibles, le temps de finaliser notre nouveau site.
+      Vous souhaitez nous soutenir dès maintenant ? Contactez-nous.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a href={`mailto:${site.email}?subject=${objet}`} class="bg-gradient-brand rounded-full px-6 py-3 font-medium text-white shadow-sm transition hover:opacity-90">Nous écrire</a>
+      <a href={site.telephoneLien} class="rounded-full px-6 py-3 font-medium ring-1 ring-black/10 transition hover:ring-black/20">{site.telephone}</a>
+      <a href="/" class="rounded-full px-6 py-3 font-medium ring-1 ring-black/10 transition hover:ring-black/20">Retour à l'accueil</a>
+    </div>
+  </section>
+</BaseLayout>

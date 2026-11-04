@@ -21,7 +21,7 @@ const thematique = await getEntry(actu.data.thematique);
 const { bandeau, galerie } = photosDu(`actus/${actu.id}`);
 ---
 
-<BaseLayout title={titre} description={resume}>
+<BaseLayout title={titre} description={resume} image={bandeau}>
   <article>
     <!-- En-tête -->
     <header class="mx-auto max-w-3xl px-4 pt-16 sm:px-6 md:pt-24">

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lepammayotte.fr/sitemap-index.xml

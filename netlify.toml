@@ -12,10 +12,6 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    # Phase d'aperçu : on demande aux moteurs de recherche de ne pas indexer le site.
-    # À SUPPRIMER le jour où lepammayotte.fr pointe vers ce site.
-    X-Robots-Tag = "noindex, nofollow"
-
     # Sécurité : le navigateur n'exécute que les fichiers du site lui-même.
     # Seule exception : la carte OpenStreetMap (frame-src). Si on ajoute un service externe
     # (vidéo YouTube intégrée, formulaire AssoConnect en iframe…), il faut l'autoriser ici.

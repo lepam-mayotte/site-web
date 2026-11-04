@@ -73,11 +73,11 @@ export const solidarite = {
 
 // Les personnes qui font vivre l'association en 2025
 export const forces = [
-  { valeur: '38', label: 'bénévoles' },
-  { valeur: '25', label: 'volontaires en service civique' },
-  { valeur: '4', label: 'salariés' },
+  { valeur: '20', label: 'bénévoles' },
+  { valeur: '11', label: 'volontaires en service civique' },
+  { valeur: '2', label: 'salariés' },
   { valeur: '2', label: 'alternants' },
-  { valeur: '4', label: 'contrats PEC' },
+  //{ valeur: '4', label: 'contrats PEC' },
 ];
 
 // Équipe affichée sur la page « L'association ». Section masquée tant que la liste est vide.

@@ -28,7 +28,7 @@ const autres = (await getCollection('thematiques'))
 const aDesActus = (await getCollection('actus', (a) => a.data.thematique.id === thematique.id)).length > 0;
 ---
 
-<BaseLayout title={t.titre} description={t.resume}>
+<BaseLayout title={t.titre} description={t.resume} image={bandeau}>
   <!-- 1. Bandeau -->
   <section class="relative isolate overflow-hidden">
     <div class="absolute inset-0 -z-10">

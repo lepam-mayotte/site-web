@@ -26,7 +26,8 @@ export const partenaires = [
   { nom: 'Ville de Dzaoudzi-Labattoir', logo: 'ville-de-dzaoudzi-labattoir' },
   { nom: 'France Travail', logo: 'france-travail' },
   { nom: 'Mission Locale de Mayotte', logo: 'mission-locale' },
-  { nom: 'Action & Solidarité Mayotte Sud-Ouest' },
+  { nom: 'Action & Solidarité Mayotte Sud-Ouest', logo: 'action-solidarite-mso' },
+  { nom: 'ASLY Formation', logo: 'asly-formation' },
 ];
 
 // Financeurs : logo dans src/assets/logos/financeurs/ ; sans logo, le nom s'affiche.

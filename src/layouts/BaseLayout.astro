@@ -37,7 +37,7 @@ const ficheAssociation =
         logo: new URL('/og-image.jpg', Astro.site).href,
         description: site.description,
         email: site.email,
-        telephone: '+262269640493',
+        telephone: site.telephoneLien.replace('tel:', '').replace(/\s/g, ''),
         identifier: legal.rna,
         address: {
           '@type': 'PostalAddress',

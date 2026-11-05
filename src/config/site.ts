@@ -8,8 +8,8 @@ export const site = {
     "Association mahoraise engagée pour l'éducation, la mobilité, l'insertion et la solidarité, au service de toute la population de Mayotte.",
   address: '53 boulevard des Amoureux, 97615 Labattoir',
   email: 'lepam@lepammayotte.com',
-  telephone: '02 69 64 04 93',
-  telephoneLien: 'tel:+262269640493', // format international, pour appeler depuis n'importe quel téléphone
+  telephone: '06 39 26 89 07',
+  telephoneLien: 'tel:+262639268907', // format international, pour appeler depuis n'importe quel téléphone
   // Un réseau sans adresse n'est pas affiché
   socials: [
     { nom: 'Facebook', url: 'https://www.facebook.com/p/LEPAM-100091974715737/' },
